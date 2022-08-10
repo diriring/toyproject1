@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/board/boardList.php">자유게시판</a>
+              <a class="nav-link active" aria-current="page" href="/view/boardList.php">자유게시판</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">추천게시판</a>
@@ -21,7 +21,7 @@
                   <?php echo "{$_SESSION['id']}님";?>
                  </a>
                  <ul class="dropdown-menu">
-                   <li><a class="dropdown-item" href="/logoutProcess.php">로그아웃</a></li>
+                   <li><a class="dropdown-item" href="/member/memberService.php?call_name=logout">로그아웃</a></li>
                    <li><a class="dropdown-item" href="#">마이페이지</a></li>
                  </ul>
               
@@ -29,25 +29,16 @@
                 }else {
               ?>
                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  메뉴
+                  	메뉴
                  </a>
                  <ul class="dropdown-menu">
-                   <li><a class="dropdown-item" href="/login.php">로그인</a></li>
-                   <li><a class="dropdown-item" href="/join.php">회원가입</a></li>        	
+                   <li><a class="dropdown-item" href="/view/login.php">로그인</a></li>
+                   <li><a class="dropdown-item" href="/view/join.php">회원가입</a></li>        	
                  </ul>
               <?php
                 }
               ?>
-<!--               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> -->
-<!--                 메뉴 -->
-<!--               </a> -->
-<!--               <ul class="dropdown-menu"> -->
-<!--                 <li><a class="dropdown-item" href="/login.php">로그인</a></li> -->
-<!--                 <li><a class="dropdown-item" href="/join.php">회원가입</a></li> -->
-<!--                 <li><a class="dropdown-item" href="/logoutProcess.php">로그아웃</a></li> -->
-<!--                 <li><hr class="dropdown-divider"></li> -->
-<!--                 <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-<!--               </ul> -->
+
             </li>
           </ul>
           <form class="d-flex" role="search">

@@ -1,5 +1,5 @@
 <?php 
-include 'temp/bootstrap.php';
+include '../temp/bootstrap.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@ include 'temp/bootstrap.php';
 
 <body>
 
-	<?php include 'temp/header.php';?>
+	<?php include '../temp/header.php';?>
 
 	<h1>Join Page</h1>
 	
@@ -47,12 +47,44 @@ include 'temp/bootstrap.php';
         </div>
         
         <div class="mb-3">
-          <button type="submit" class="btn btn-primary mb-3">회원가입</button>
+          <button type="button" id="joinBtn" class="btn btn-primary mb-3">회원가입</button>
         </div>
     </form>
     
 	</div>
-	
+
+<script>
+		$("#joinBtn").on("click", function() {
+			console.log("클릭");
+    		$.ajax({
+    			type: "POST",
+    			url: "/member/memberService.php",
+    			data: {
+    				id: $("#id").val(),
+    				password: $("#password").val(),
+					name: $("#name").val(),
+					email: $("#email").val(),
+					phone: $("#phone").val(),
+    				call_name: "setAdd"
+    			},
+    			success: function(result) {
+    				console.log(result);
+    				if(result == 1) {
+    					alert("회원가입 성공");
+    					location.href="./index.php";
+    					
+    				}else {
+    					alert("회원가입 실패");
+    					location.href="./join.php";
+    				}
+    			},
+    			error: function() {
+    				alert("에러");
+    			}
+    		});
+    	});
+</script>
+
 </body>
 
 </html>
