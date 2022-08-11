@@ -51,13 +51,18 @@ session_start();
 	</div>
 
 <script type="text/javascript">
-	$("#content").summernote();
+	$("#content").summernote({
+		height: 400,
+		width: 1210
+	
+	});
+	
 	
 	$("#addBtn").on("click", function() {
 //     	console.log("클릭");
     	$.ajax({
     		type: "POST",
-    		url: "/board/boardService.php",
+    		url: "/board/BoardService.php",
     		data: {
     			id: $("#id").val(),
     			title: $("#title").val(),

@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div>
 	<nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="/index.php">보드게임</a>
@@ -21,8 +21,8 @@
                   <?php echo "{$_SESSION['id']}님";?>
                  </a>
                  <ul class="dropdown-menu">
-                   <li><a class="dropdown-item" href="/member/memberService.php?call_name=logout">로그아웃</a></li>
-                   <li><a class="dropdown-item" href="#">마이페이지</a></li>
+                   <li><a class="dropdown-item" href="/member/MemberService.php?call_name=logout">로그아웃</a></li>
+                   <li><a class="dropdown-item" href="/view/myPage.php">마이페이지</a></li>
                  </ul>
               
               <?php 

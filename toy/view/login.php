@@ -37,7 +37,7 @@ include '../temp/bootstrap.php';
 		
 		$.ajax({
 			type: "POST",
-			url: "/member/memberService.php",
+			url: "/member/MemberService.php",
 			data: {
 				id: $("#id").val(),
 				password: $("#password").val(),

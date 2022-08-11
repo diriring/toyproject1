@@ -1,8 +1,8 @@
 <?php
 
-include_once("./memberDAO.php");
+include_once $_SERVER['DOCUMENT_ROOT']."/member/MemberDAO.php";
 
-class memberService {
+class MemberService {
     
     function test() {
         if($_POST['call_name'] == "test") {
@@ -15,7 +15,7 @@ class memberService {
         if($_POST['call_name'] == "getLogin") {
             
             //DB조회
-            $dao = new memberDAO();
+            $dao = new MemberDAO();
             $result = $dao->getLogin($_POST['id'], $_POST['password']);
             
             $res = 0;
@@ -36,6 +36,15 @@ class memberService {
     function getLogout() {
         session_start();
         session_destroy();
+        
+        echo "<script>location.href = \"/index.php\";</script>";
+    }
+    
+    function getMyInfo() {
+        $dao = new MemberDAO();
+        $result = $dao->getMyInfo($_SESSION['id']);
+        
+        return $result;
     }
     
     //회원가입
@@ -47,9 +56,16 @@ class memberService {
            
     }
     
+    function setUpdate() {
+        $dao = new memberDAO();
+        $result = $dao->setUpdate($_POST);
+        
+        return $result;
+    }
+    
 }
 
-$service = new memberService();
+$service = new MemberService();
 if (isset($_POST["call_name"])) {
     switch($_POST["call_name"]) {
         case "test":
@@ -61,9 +77,19 @@ if (isset($_POST["call_name"])) {
         case "setAdd":
             echo $service->setAdd();
             return;
+        case "setUpdate":
+            echo $service->setUpdate();
+            return;
     };
 }
-if($_GET["call_name"] == "logout") {
-    $service->getLogout();
-    echo "<script>location.href = \"/index.php\";</script>";
+if (isset($_GET["call_name"])) {
+    switch($_GET["call_name"]) {
+        case "logout":
+            echo $service->getLogout();
+            return;
+        case "getMyInfo":
+            echo $service->getMyInfo();
+            return;
+
+    };
 }

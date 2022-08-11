@@ -1,6 +1,6 @@
 <?php
 
-class memberDAO {
+class MemberDAO {
     
     public function getLogin($id, $pw) {
   
@@ -13,6 +13,16 @@ class memberDAO {
         
         return $result['id'];
         
+    }
+    
+    public function getMyInfo($id) {
+        $pdo = new PDO("mysql:host=localhost;dbname=toyproject", "root", "gkst2zip");
+        $stmt = $pdo->prepare("SELECT id, name, email, phone FROM MEMBER WHERE id = ?");
+        $stmt->execute(array($id));
+        // Fetch 모드 설정
+        $result=$stmt->fetch(PDO::FETCH_BOTH);
+        
+        return $result;
     }
     
     public function setAdd($array) {
@@ -28,4 +38,20 @@ class memberDAO {
         
         return $count;
     }
+    
+    public function setUpdate($array) {
+        $pdo = new PDO("mysql:host=localhost;dbname=toyproject", "root", "gkst2zip");
+        $sql = "
+                UPDATE MEMBER SET
+                name = ?, email = ?, phone = ?
+                WHERE id = ?
+                ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array($array['name'], $array['email'], $array['phone'], $array['id']));
+        
+        $count = $stmt->rowCount();
+        
+        return $count;
+    }
+    
 }
