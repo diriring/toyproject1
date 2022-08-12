@@ -20,7 +20,6 @@ class MemberService {
     //로그인
     function getLogin() {
             //DB조회
-//             $dao = new MemberDAO();
             $result = $this->getDao()->getLogin($_POST['id'], $_POST['password']);
             
             $res = 0;
@@ -45,16 +44,14 @@ class MemberService {
     }
     
     function getMyInfo() {
-        $dao = new MemberDAO();
-        $result = $dao->getMyInfo($_SESSION['id']);
+        $result = $this->getDao()->getMyInfo($_SESSION['id']);
         
         return $result;
     }
     
     //회원가입
     function setAdd() {
-        $dao = new MemberDAO();
-        $result = $dao->setAdd($_POST);
+        $result = $this->getDao()->setAdd($_POST);
         
         return $result;
            
@@ -62,22 +59,20 @@ class MemberService {
     
     //회원 정보 수정
     function setUpdate() {
-        $dao = new MemberDAO();
-        $result = $dao->setUpdate($_POST);
+        $result = $this->getDao()->setUpdate($_POST);
         
         return $result;
     }
     
     //회원 탈퇴 처리
     function setMemberDelete() {
-        $dao = new MemberDAO();
-        $return = $dao->getPW($_POST['id']);
+        $return = $this->getDao()->getPW($_POST['id']);
         $pw = $return['password'];
         
         $result = 3;
         
         if ($_POST['password'] == $pw) {
-            $result = $dao->setMemberDelete($_POST['id']);
+            $result = $this->getDao()->setMemberDelete($_POST['id']);
             if($result == 1) {
                 session_start();
                 session_destroy();
