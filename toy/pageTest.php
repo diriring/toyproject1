@@ -1,9 +1,11 @@
 <?php
 
-$totalCount = 4;
+$totalCount = 6;
 $totalPage = $totalCount/3;
 echo 'befor totalPage'.$totalPage.'<br>';
-if($totalPage%3 != 0) {
+$num = $totalCount%3;
+echo '나머지'.$num.'<br>';
+if($totalCount%3 != 0) {
     $totalPage = floor($totalPage) + 1;
 }
 echo 'after totalPage'.$totalPage.'<br>';

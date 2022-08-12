@@ -49,16 +49,36 @@ class MemberService {
     
     //회원가입
     function setAdd() {
-        $dao = new memberDAO();
+        $dao = new MemberDAO();
         $result = $dao->setAdd($_POST);
         
         return $result;
            
     }
     
+    //회원 정보 수정
     function setUpdate() {
-        $dao = new memberDAO();
+        $dao = new MemberDAO();
         $result = $dao->setUpdate($_POST);
+        
+        return $result;
+    }
+    
+    //회원 탈퇴 처리
+    function setMemberDelete() {
+        $dao = new MemberDAO();
+        $return = $dao->getPW($_POST['id']);
+        $pw = $return['password'];
+        
+        $result = 3;
+        
+        if ($_POST['password'] == $pw) {
+            $result = $dao->setMemberDelete($_POST['id']);
+            if($result == 1) {
+                session_start();
+                session_destroy();
+            }
+        }
         
         return $result;
     }
@@ -80,6 +100,9 @@ if (isset($_POST["call_name"])) {
         case "setUpdate":
             echo $service->setUpdate();
             return;
+        case "setMemberDelete":
+            echo $service->setMemberDelete();
+        
     };
 }
 if (isset($_GET["call_name"])) {

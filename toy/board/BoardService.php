@@ -5,6 +5,7 @@ include_once $_SERVER['DOCUMENT_ROOT']."/util/Pager.php";
 
 class BoardService {
     
+    //게시글 목록 조회
     public function getList() {
         $dao = new BoardDAO();
         
@@ -13,7 +14,7 @@ class BoardService {
             $pn = 1;
         }
         
-        $pager = new Pager(3, $pn);
+        $pager = new Pager(5, $pn);
         $pager->makeRow();
         
         $result = $dao->getList($pager->getStartRow(), $pager->getPerPage());
@@ -21,6 +22,7 @@ class BoardService {
         return $result;
     }
     
+    //게시글 수 조회
     public function getTotalCount() {
         $dao = new BoardDAO();
         
@@ -29,6 +31,7 @@ class BoardService {
         return $result;
     }
     
+    //게시글 정보 조회
     public function getDetail($bnum) {
         $dao = new BoardDAO();
         
@@ -38,6 +41,7 @@ class BoardService {
         return $result;
     }
     
+    //게시글 등록
     public function setAdd() {
         
         $dao = new BoardDAO();
@@ -46,6 +50,7 @@ class BoardService {
         return $result;
     }
     
+    //게시글 수정
     public function setUpdate() {
         
         $dao = new BoardDAO();
@@ -54,6 +59,7 @@ class BoardService {
         return $result;
     }
     
+    //게시글 삭제
     public function setDelete() {
         $dao = new BoardDAO();
         $result = $dao->setDelete($_GET['bnum']);

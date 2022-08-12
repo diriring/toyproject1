@@ -47,7 +47,7 @@ class Pager {
     
     public function makeNum($totalCount) {
         $totalPage = $totalCount/$this->perPage;
-        if($totalPage%$this->perPage != 0) {
+        if($totalCount%$this->perPage != 0) {
             $totalPage = floor($totalPage) + 1;
         }
         

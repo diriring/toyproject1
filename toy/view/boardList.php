@@ -10,11 +10,9 @@ if($_GET['pn'] == NULL) {
     $pn = 1;
 }
 
-$pager = new Pager(3, $pn);
+$pager = new Pager(5, $pn);
 $totalCount = $test->getTotalCount();
 $pager->makeNum($totalCount);
-// $prePn = $pager->getPre()?$pager->getStartNum()-1:1;
-// $nextPn =$pager->getNext()?$pager->getLastNum()+1:$pager->getLastNum();
 
 $list = $test->getList();
 

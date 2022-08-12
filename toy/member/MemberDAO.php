@@ -6,7 +6,7 @@ class MemberDAO {
   
         
         $pdo = new PDO("mysql:host=localhost;dbname=toyproject", "root", "gkst2zip");
-        $stmt = $pdo->prepare("SELECT id FROM MEMBER WHERE id = ? AND password = ?");
+        $stmt = $pdo->prepare("SELECT id FROM MEMBER WHERE id = ? AND password = ? AND isDel = 0");
         $stmt->execute(array($id, $pw));
         // Fetch 모드 설정
         $result=$stmt->fetch(PDO::FETCH_BOTH);
@@ -17,9 +17,18 @@ class MemberDAO {
     
     public function getMyInfo($id) {
         $pdo = new PDO("mysql:host=localhost;dbname=toyproject", "root", "gkst2zip");
-        $stmt = $pdo->prepare("SELECT id, name, email, phone FROM MEMBER WHERE id = ?");
+        $stmt = $pdo->prepare("SELECT id, name, email, phone FROM MEMBER WHERE id = ? AND isDel = 0");
         $stmt->execute(array($id));
         // Fetch 모드 설정
+        $result=$stmt->fetch(PDO::FETCH_BOTH);
+        
+        return $result;
+    }
+    
+    public function getPW($id) {
+        $pdo = new PDO("mysql:host=localhost;dbname=toyproject", "root", "gkst2zip");
+        $stmt = $pdo->prepare("SELECT password FROM MEMBER WHERE id = ?");
+        $stmt->execute(array($id));
         $result=$stmt->fetch(PDO::FETCH_BOTH);
         
         return $result;
@@ -48,6 +57,21 @@ class MemberDAO {
                 ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array($array['name'], $array['email'], $array['phone'], $array['id']));
+        
+        $count = $stmt->rowCount();
+        
+        return $count;
+    }
+    
+    public function setMemberDelete($id) {
+        $pdo = new PDO("mysql:host=localhost;dbname=toyproject", "root", "gkst2zip");
+        $sql = "
+                UPDATE MEMBER SET
+                isDel = 1
+                WHERE id = ?
+                ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array($id));
         
         $count = $stmt->rowCount();
         
