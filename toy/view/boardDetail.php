@@ -1,5 +1,5 @@
 <?php
-include '../temp/bootstrap.php';
+require_once '../temp/bootstrap.php';
 include_once("../board/BoardService.php");
 $test = new BoardService();
 $board = $test->getDetail($_GET['bnum']);
@@ -18,7 +18,7 @@ session_start();
 
 <body>
 	
-	<?php include '../temp/header.php';?>
+	<?php require_once '../temp/header.php';?>
 
 	<div class="container">
     	<h1>Board Detail Page</h1>

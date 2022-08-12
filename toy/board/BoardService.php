@@ -1,7 +1,7 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT']."/board/BoardDAO.php";
-include_once $_SERVER['DOCUMENT_ROOT']."/util/Pager.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . '/board/BoardDAO.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/util/Pager.php';
 
 class BoardService {
     

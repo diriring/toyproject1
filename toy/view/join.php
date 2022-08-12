@@ -1,5 +1,5 @@
 <?php 
-include '../temp/bootstrap.php';
+require_once '../temp/bootstrap.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@ include '../temp/bootstrap.php';
 
 <body>
 
-	<?php include '../temp/header.php';?>
+	<?php require_once '../temp/header.php';?>
 
 	<h1>Join Page</h1>
 	

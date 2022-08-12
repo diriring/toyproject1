@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT']."/util/Pager.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . '/util/Pager.php';
 
 class BoardDAO {
     private $pdo;
@@ -35,19 +35,11 @@ class BoardDAO {
     }
     
     public function getDetail($bnum) {
-//         $result = array();
         $pdo = new PDO("mysql:host=localhost;dbname=toyproject", "root", "gkst2zip");
-        $sql = "SELECT * FROM BOARD WHERE bnum = :bnum";
+        $sql = "SELECT * FROM BOARD WHERE bnum = ?";
         $stmt = $pdo->prepare($sql);
-       // $stmt->bindValue(':bum', $bnum, PDO::PARAM_INT);
-        $result = $stmt->execute(array($bnum));
-//         false 
-        
-//         $result['result'] = false;
-        
-//         $result['result'] = true;
-        $result['data'] =  $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
+        $result = $stmt->execute(array($bnum));    
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         
         return $result;

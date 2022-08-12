@@ -1,8 +1,15 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT']."/member/MemberDAO.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . '/member/MemberDAO.php';
 
 class MemberService {
+    
+    private $dao;
+    
+    function getDao() {
+        $this->dao = new MemberDAO();
+        return $this->dao;
+    }
     
     function test() {
         if($_POST['call_name'] == "test") {
@@ -12,11 +19,9 @@ class MemberService {
     
     //로그인
     function getLogin() {
-        if($_POST['call_name'] == "getLogin") {
-            
             //DB조회
-            $dao = new MemberDAO();
-            $result = $dao->getLogin($_POST['id'], $_POST['password']);
+//             $dao = new MemberDAO();
+            $result = $this->getDao()->getLogin($_POST['id'], $_POST['password']);
             
             $res = 0;
             
@@ -29,7 +34,6 @@ class MemberService {
             }
             
             return $res;
-        }
     }
     
     //로그아웃

@@ -1,7 +1,14 @@
 <?php
         
-define("DB_HOST", "localhost");
-define("DB_DATABASE", "toyproject");
-define("DB_USER", "root");
-define("DB_PASSWORD", "gkst2zip");
-
+Class DBconn {
+    
+    private $pdo;
+    
+    public function __construct() {
+        $this->pdo = new PDO("mysql:host=localhost;dbname=toyproject", "root", "gkst2zip");
+    }
+    
+    public function getPdo() {
+        return $this->pdo;
+    }
+}

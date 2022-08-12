@@ -1,5 +1,5 @@
 <?php 
-include '../temp/bootstrap.php';
+require_once '../temp/bootstrap.php';
 include_once $_SERVER['DOCUMENT_ROOT']."/util/Pager.php";
 include_once("../board/BoardService.php");
 
@@ -29,7 +29,7 @@ session_start();
 
 <body>
 	
-	<?php include '../temp/header.php';?>
+	<?php require_once '../temp/header.php';?>
 
 	<div class="container">
     	<h1>Board List Page</h1>

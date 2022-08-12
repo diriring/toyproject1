@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../temp/bootstrap.php';
+require_once '../temp/bootstrap.php';
 include_once("../member/MemberService.php");
 
 $service = new MemberService();
@@ -19,7 +19,7 @@ $member = $service->getMyInfo();
 
 <body>
 
-	<?php include '../temp/header.php';?>
+	<?php require_once '../temp/header.php';?>
 
 	
 	<div class="container">

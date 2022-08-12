@@ -1,5 +1,5 @@
 <?php 
-include 'temp/bootstrap.php';
+require_once 'temp/bootstrap.php';
 session_start();
 ?>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ session_start();
 
 <body>
 	
-	<?php include 'temp/header.php';?>
+	<?php require_once 'temp/header.php';?>
 	
 	<div class="container">
     	<h1>Index Page</h1>
