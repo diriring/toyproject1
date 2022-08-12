@@ -34,6 +34,28 @@ class MemberDAO {
         return $result;
     }
     
+    public function getIdCheck($input) {
+        $pdo = new PDO("mysql:host=localhost;dbname=toyproject", "root", "gkst2zip");
+        $sql = "SELECT COUNT(id) FROM MEMBER WHERE id = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array($input));
+        
+        $count = $stmt->rowCount();
+        
+        return $count;
+    }
+    
+    public function getEmailCheck($input) {
+        $pdo = new PDO("mysql:host=localhost;dbname=toyproject", "root", "gkst2zip");
+        $sql = "SELECT COUNT(id) FROM MEMBER WHERE email = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array($input));
+        
+        $count = $stmt->rowCount();
+        
+        return $count;
+    }
+    
     public function setAdd($array) {
         $pdo = new PDO("mysql:host=localhost;dbname=toyproject", "root", "gkst2zip");
         $sql = "

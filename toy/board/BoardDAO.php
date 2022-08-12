@@ -2,6 +2,7 @@
 include_once $_SERVER['DOCUMENT_ROOT']."/util/Pager.php";
 
 class BoardDAO {
+    private $pdo;
     
     public function getList($startRow, $perPage) {
         $pdo = new PDO("mysql:host=localhost;dbname=toyproject", "root", "gkst2zip");
@@ -23,6 +24,7 @@ class BoardDAO {
         $pdo = new PDO("mysql:host=localhost;dbname=toyproject", "root", "gkst2zip");
         $sql = "SELECT COUNT(bnum) FROM BOARD";
         $stmt = $pdo->prepare($sql);
+        
         $stmt->execute();
         
         //행의 첫번째 컬럼을 리턴
@@ -33,10 +35,18 @@ class BoardDAO {
     }
     
     public function getDetail($bnum) {
+//         $result = array();
         $pdo = new PDO("mysql:host=localhost;dbname=toyproject", "root", "gkst2zip");
-        $sql = "SELECT * FROM BOARD WHERE bnum = ?";
+        $sql = "SELECT * FROM BOARD WHERE bnum = :bnum";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute(array($bnum));
+       // $stmt->bindValue(':bum', $bnum, PDO::PARAM_INT);
+        $result = $stmt->execute(array($bnum));
+//         false 
+        
+//         $result['result'] = false;
+        
+//         $result['result'] = true;
+        $result['data'] =  $stmt->fetch(PDO::FETCH_ASSOC);
         
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         

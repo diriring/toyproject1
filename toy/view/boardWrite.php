@@ -71,11 +71,11 @@ session_start();
     		},
     		success: function(result) {
     			console.log(result);
-    			if(result == 1) {
+    			if (result == 1) {
     				alert("등록 성공");
     				location.href="./boardList.php";
     				
-    			}else {
+    			} else {
     				alert("등록 실패");
     				location.href="./boardList.php";
     			}
