@@ -6,13 +6,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/util/Pager.php';
 class BoardService {
     
     //게시글 목록 조회
-    public function getList() {
+    public function getList($pn) {
         $dao = new BoardDAO();
-        
-        $pn = $_GET['pn'];
-        if($_GET['pn'] == NULL) {
-            $pn = 1;
-        }
         
         $pager = new Pager(5, $pn);
         $pager->makeRow();
@@ -60,15 +55,17 @@ class BoardService {
     }
     
     //게시글 삭제
-    public function setDelete() {
+    public function setDelete($bnum) {
         $dao = new BoardDAO();
-        $result = $dao->setDelete($_GET['bnum']);
+        $result = $dao->setDelete($bnum);
         
-        if($result == 1) {
-            echo "<script>alert(\"삭제 성공\"); location.href = \"/view/boardList.php\";</script>";
-        }else {
-            echo "<script>alert(\"삭제 실패\"); location.href = \"/view/boardList.php\";</script>";
-        }
+        return $result;
+        
+//         if($result == 1) {
+//             echo "<script>alert(\"삭제 성공\"); location.href = \"/view/boardList.php\";</script>";
+//         }else {
+//             echo "<script>alert(\"삭제 실패\"); location.href = \"/view/boardList.php\";</script>";
+//         }
     }
 }
 
@@ -84,10 +81,7 @@ if (isset($_POST["call_name"])) {
         case "setUpdate":
             echo $service->setUpdate();
             return;
-        
-//         case "getList":
-//             echo $service->getList();
-//             return;
+       
     };
 }
 if($_GET["call_name"] == "setDelete") {

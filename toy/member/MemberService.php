@@ -6,19 +6,15 @@ class MemberService {
     
     private $dao;
     
-    function getDao() {
+    public function getDao() {
         $this->dao = new MemberDAO();
         return $this->dao;
     }
     
-    function test() {
-        if($_POST['call_name'] == "test") {
-            return "test실행";
-        }
-    }
+    
     
     //로그인
-    function getLogin() {
+    public function getLogin() {
             //DB조회
             $result = $this->getDao()->getLogin($_POST['id'], $_POST['password']);
             
@@ -36,21 +32,23 @@ class MemberService {
     }
     
     //로그아웃
-    function getLogout() {
+    public function getLogout() {
         session_start();
         session_destroy();
         
         echo "<script>location.href = \"/index.php\";</script>";
     }
     
-    function getMyInfo() {
-        $result = $this->getDao()->getMyInfo($_SESSION['id']);
+    //회원 정보 조회
+    public function getMyInfo($id) {
+        
+        $result = $this->getDao()->getMyInfo($id);
         
         return $result;
     }
     
     //회원가입
-    function setAdd() {
+    public function setAdd() {
         $result = $this->getDao()->setAdd($_POST);
         
         return $result;
@@ -58,14 +56,14 @@ class MemberService {
     }
     
     //회원 정보 수정
-    function setUpdate() {
+    public function setUpdate() {
         $result = $this->getDao()->setUpdate($_POST);
         
         return $result;
     }
     
     //회원 탈퇴 처리
-    function setMemberDelete() {
+    public function setMemberDelete() {
         $return = $this->getDao()->getPW($_POST['id']);
         $pw = $return['password'];
         
@@ -87,9 +85,6 @@ class MemberService {
 $service = new MemberService();
 if (isset($_POST["call_name"])) {
     switch($_POST["call_name"]) {
-        case "test":
-            echo $service->test();
-            return;
         case "getLogin":
             echo $service->getLogin();
             return;
@@ -101,7 +96,7 @@ if (isset($_POST["call_name"])) {
             return;
         case "setMemberDelete":
             echo $service->setMemberDelete();
-        
+            return;
     };
 }
 if (isset($_GET["call_name"])) {
@@ -109,9 +104,5 @@ if (isset($_GET["call_name"])) {
         case "logout":
             echo $service->getLogout();
             return;
-        case "getMyInfo":
-            echo $service->getMyInfo();
-            return;
-
     };
 }

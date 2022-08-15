@@ -1,8 +1,6 @@
 <?php
 require_once '../temp/bootstrap.php';
-include_once("../board/BoardService.php");
-$test = new BoardService();
-$board = $test->getDetail($_GET['bnum']);
+
 session_start();
 ?>
 
@@ -24,37 +22,32 @@ session_start();
     	<h1>Board Detail Page</h1>
     	
     	<div class="container mt-5">
-        	<table class="table">
-        		<tr>
-        			<td><?php echo $board['title']?></td>
-        			<td>조회수</td>
-        			<td><?php echo $board['hit']?></td>
-        		</tr>
-        		<tr>
-        			<td colspan="2"><?php echo $board['id']?></td>
-        			<td><?php echo $board['regDate']?></td>
-        		</tr>
-        		<tr>
-        			<td colspan="3"><?php echo $board['content']?></td>
-        		</tr>
+        	<input type="hidden" id="sessionId" value="<?php echo $_SESSION['id'];?>">
+        	
+        	<table class="table table-striped table-hover" id="detailResult">
+        		<colgroup>
+    				<col width="55%"/>
+    				<col width="15%"/>
+    				<col width="15%"/>
+    				<col width="15%"/>
+    			</colgroup>
         		
         	</table>
-        	
 			
-        	<?php if ($board['id'] == $_SESSION['id']) : ?>
-        	<div>
-        		<a class="btn btn-outline-primary" href="./boardUpdate.php?bnum=<?php echo $board['bnum']?>">수정</a>
-        		<a class="btn btn-outline-primary" href="../board/BoardService.php?call_name=setDelete&bnum=<?php echo $board['bnum']?>">삭제</a>
-        	</div>
-        	<?php endif;?>
-        	
+			
+			<div id="buttons">
+			</div>
         
         	
         	
         </div>
     </div>
 
-	
+<script src="../resources/js/boardDetail.js"></script>
+<script>
+    getDetail();
+</script>
 
 
 </body>
+</html>

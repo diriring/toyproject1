@@ -1,6 +1,7 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/util/DBconn.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/member/MemberVO.php';
 
 class MemberDAO {
     
@@ -19,7 +20,7 @@ class MemberDAO {
         $stmt = $this->getPdo()->prepare($sql);
         $stmt->execute(array($id, $pw));
         // Fetch 모드 설정
-        $result=$stmt->fetch(PDO::FETCH_BOTH);
+        $result=$stmt->fetch(PDO::FETCH_ASSOC);
         
         return $result['id'];
         
@@ -31,9 +32,16 @@ class MemberDAO {
         $stmt = $this->getPdo()->prepare($sql);
         $stmt->execute(array($id));
         // Fetch 모드 설정
-        $result=$stmt->fetch(PDO::FETCH_BOTH);
+        $result=$stmt->fetch(PDO::FETCH_ASSOC);
         
-        return $result;
+        $member = new MemberVO();
+        
+        $member->setId($result['id']);
+        $member->setName($result['name']);
+        $member->setEmail($result['email']);
+        $member->setPhone($result['phone']);
+        
+        return $member;
     }
     
     // 회원 비밀번호 조회
@@ -41,7 +49,7 @@ class MemberDAO {
         $sql = 'SELECT password FROM MEMBER WHERE id = ?';
         $stmt = $this->getPdo()->prepare($sql);
         $stmt->execute(array($id));
-        $result=$stmt->fetch(PDO::FETCH_BOTH);
+        $result=$stmt->fetch(PDO::FETCH_ASSOC);
         
         return $result;
     }

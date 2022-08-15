@@ -1,14 +1,7 @@
 <?php
-session_start();
-
 require_once '../temp/bootstrap.php';
 
-include_once("../member/MemberService.php");
-
-$service = new MemberService();
-
-$member = $service->getMyInfo();
-
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,28 +19,70 @@ $member = $service->getMyInfo();
 
 	<div class="container">
     	<h1>My Page</h1>
-    	<h3>환영합니다 <?php echo $member['id'];?>님.</h3>
-		<table>
-			<tr>
-				<td>아이디</td>
-				<td><?php echo $member['id'];?></td>
-			</tr>
-			<tr>
-				<td>이름</td>
-				<td><?php echo $member['name'];?></td>
-			</tr>
-			<tr>
-				<td>email</td>
-				<td><?php echo $member['email'];?></td>
-			</tr>
-			<tr>
-				<td>전화번호</td>
-				<td><?php echo $member['phone'];?></td>
-			</tr>
+    	
+    	<input type="hidden" id="sessionId" value="<?php echo $_SESSION['id'];?>">
+    	
+		<table id="info">
+
 		</table>
+		
 		<a class="btn btn-outline-primary" href="./memberUpdate.php">회원 정보 수정</a>
 		<a class="btn btn-outline-primary" href="./memberDelete.php">회원 탈퇴</a>
 	</div>
+	
+<script>
+	getMyInfo();
+	
+	function getMyInfo() {
+    	
+    	$.ajax({
+    		type: "POST",
+    		url: "/member/MemberMapper.php",
+    		data: {
+    			id: $("#sessionId").val(),
+    			call_name: "getMyInfo"
+    		},
+    		success: function(result) {
+//     			console.log(result);
+    			let data = JSON.parse(result);
+//     			console.log(data);
+    			
+    			infoHtml(data);
+    
+    		},
+    		error: function() {
+    			alert("조회 에러");
+    		}
+    	});
+    	
+    };
+    
+    function infoHtml(data) {
+    
+    	let html = '<tr>';
+    	html += '<td>아이디</td>';
+    	html += '<td>' + data.id + '</td>';
+    	html += '</tr>';
+    	
+    	html += '<tr>';
+    	html += '<td>이름</td>';
+    	html += '<td>' + data.name + '</td>';
+    	html += '</tr>';
+    	
+    	html += '<tr>';
+    	html += '<td>email</td>';
+    	html += '<td>' + data.email + '</td>';
+    	html += '</tr>';
+    	
+    	html += '<tr>';
+    	html += '<td>전화번호</td>';
+    	html += '<td>' + data.phone + '</td>';
+    	html += '</tr>';
+    	
+    	$("#info").append(html);
+    
+    };
+</script>
 </body>
 
 </html>
