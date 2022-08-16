@@ -21,7 +21,12 @@ require_once '../temp/bootstrap.php';
 	
     	<div class="mb-3">
           <label for="id" class="form-label">ID</label>
-          <input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력해주세요.">
+
+          <div class="input-group">
+              <input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력해주세요.">
+              <button type="button" id="idCheckBtn" class="btn btn-outline-secondary">중복확인</button>
+          </div>
+
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">비밀번호</label>
@@ -40,11 +45,15 @@ require_once '../temp/bootstrap.php';
         
         <div class="mb-3">
           <label for="email" class="form-label">E-Mail</label>
-          <input type="email" class="form-control" name="email" id="email" placeholder="이메일을 입력해주세요.">
+          <div class="input-group">
+              <input type="email" class="form-control" name="email" id="email" placeholder="이메일을 입력해주세요.	ex)email@example.com">
+              <button type="button" id="emailCheckBtn" class="btn btn-outline-secondary">중복확인</button>
+          </div>
         </div>
         <div class="mb-3">
           <label for="phone" class="form-label">Phone</label>
           <input type="text" class="form-control" name="phone" id="phone" placeholder="전화번호를 입력해주세요.">
+          <div>전화번호는 010-xxxx-xxxx 형식으로 입력해주세요.</div>
         </div>
         
         <div class="mb-3">

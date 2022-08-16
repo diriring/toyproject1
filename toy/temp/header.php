@@ -21,7 +21,7 @@
                   <?php echo "{$_SESSION['id']}님";?>
                  </a>
                  <ul class="dropdown-menu">
-                   <li><a class="dropdown-item" href="/member/MemberService.php?call_name=logout">로그아웃</a></li>
+                   <li><a class="dropdown-item" id="logout" href="#">로그아웃</a></li>
                    <li><a class="dropdown-item" href="/view/myPage.php">마이페이지</a></li>
                  </ul>
               
@@ -49,3 +49,23 @@
       </div>
     </nav>
 </div>
+
+<script>
+	$("#logout").on("click", function () {
+		console.log("로그아웃 클릭");
+		$.ajax({
+			type: "POST",
+    		url: "/member/MemberService.php",
+    		data: {
+
+    			call_name: "logout"
+    		},
+    		success: function() {
+				location.href = "/index.php";
+    		},
+    		error: function() {
+    			alert("에러");
+    		}
+		});
+	});
+</script>

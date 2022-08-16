@@ -29,7 +29,8 @@ session_start();
 		<a class="btn btn-outline-primary" href="./memberUpdate.php">회원 정보 수정</a>
 		<a class="btn btn-outline-primary" href="./memberDelete.php">회원 탈퇴</a>
 	</div>
-	
+
+
 <script>
 	getMyInfo();
 	

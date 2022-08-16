@@ -36,7 +36,7 @@ class MemberService {
         session_start();
         session_destroy();
         
-        echo "<script>location.href = \"/index.php\";</script>";
+//         echo "<script>location.href = \"/index.php\";</script>";
     }
     
     //회원 정보 조회
@@ -44,6 +44,20 @@ class MemberService {
         
         $result = $this->getDao()->getMyInfo($id);
         
+        return $result;
+    }
+    
+    //아이디 중복 체크
+    public function getIdCheck() {
+        $result = $this->getDao()->getIdCheck($_POST['id']);
+        
+        return $result;
+    }
+    
+    //이메일 중복 체크
+    public function getEmailCheck() {
+        $result = $this->getDao()->getEmailCheck($_POST['email']);
+
         return $result;
     }
     
@@ -97,12 +111,15 @@ if (isset($_POST["call_name"])) {
         case "setMemberDelete":
             echo $service->setMemberDelete();
             return;
-    };
-}
-if (isset($_GET["call_name"])) {
-    switch($_GET["call_name"]) {
         case "logout":
             echo $service->getLogout();
             return;
+        case "getIdCheck":
+            echo $service->getIdCheck();
+            return;
+        case "getEmailCheck":
+            echo $service->getEmailCheck();
+            return;
     };
 }
+

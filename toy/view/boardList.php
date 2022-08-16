@@ -45,8 +45,8 @@ session_start();
     	<div class="row justify-content-between" id="pageResult">
 
 		</div>
-    	
     	<a class="btn btn-outline-primary" href="./boardWrite.php">글 쓰기</a>
+    	
 	</div>
 
 <script src = "../resources/js/boardList.js"></script>

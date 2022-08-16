@@ -19,8 +19,9 @@ function getDetail() {
  			//console.log(result);
 			let data = JSON.parse(result);
 			//console.log(data);
-			updateHtml(data);
-			
+
+			$("#title").val(data.title);
+			$("#id").val(data.id);
 			summernoteInit("content", data.content);
 
 		},
@@ -66,18 +67,3 @@ $("#updateBtn").on("click", function() {
 		}
 	});
 });
-
-//조회 정보 html 작성
-function updateHtml(data) {
-	
-	let html = '<div class="row">';
-	html += '<div class="input-group mb-3">';
-	html += '<span class="input-group-text" id="basic-addon1">글 제목</span>';
-	html += '<input type="text" name="title" id="title" class="form-control" placeholder="Title" aria-describedby="basic-addon1" value="' + data.title + '">';
-	html += '<span class="input-group-text" id="basic-addon1">작성자</span>';
-	html += '<input type="text" name="id" id="id" class="form-control" placeholder="Username" aria-describedby="basic-addon1" value="' + data.id + '" readonly="readonly">';
-	html += '</div>' + '</div>';
-	
-	$("#ajaxResult").prepend(html);
-	
-};

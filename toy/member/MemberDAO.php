@@ -56,22 +56,24 @@ class MemberDAO {
     
     // 아이디 중복 조회
     public function getIdCheck($input) {
-        $sql = "SELECT COUNT(id) FROM MEMBER WHERE id = ?";
+        $sql = "SELECT COUNT(id) FROM MEMBER WHERE id = :id";
         $stmt = $this->getPdo()->prepare($sql);
-        $stmt->execute(array($input));
+        $stmt->bindValue(':id', $input, PDO::PARAM_STR);
+        $stmt->execute();
         
-        $count = $stmt->rowCount();
+        $count = $stmt->fetchColumn();
         
         return $count;
     }
     
-    //이메일 중복 조회
+    // 이메일 중복 조회
     public function getEmailCheck($input) {
-        $sql = "SELECT COUNT(id) FROM MEMBER WHERE email = ?";
+        $sql = "SELECT COUNT(id) FROM MEMBER WHERE email = :email";
         $stmt = $this->getPdo()->prepare($sql);
-        $stmt->execute(array($input));
+        $stmt->bindValue(':email', $input, PDO::PARAM_STR);
+        $stmt->execute();
         
-        $count = $stmt->rowCount();
+        $count = $stmt->fetchColumn();
         
         return $count;
     }
