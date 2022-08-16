@@ -50,10 +50,6 @@ session_start();
 	</div>
 
 <script src = "../resources/js/boardList.js"></script>
-<script>
-	getList();
-</script>
-
 </body>
 
 </html>

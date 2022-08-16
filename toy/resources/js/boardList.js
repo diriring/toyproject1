@@ -1,4 +1,6 @@
-	
+$( document ).ready(function() {
+	getList();
+});
 
 // 게시글 목록 조회 및 페이지 생성	
 function getList() {

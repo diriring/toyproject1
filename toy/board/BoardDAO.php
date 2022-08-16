@@ -2,6 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/util/Pager.php';
 
 class BoardDAO {
+    
     private $pdo;
     
     public function getList($startRow, $perPage) {

@@ -35,12 +35,10 @@ class MemberDAO {
         $result=$stmt->fetch(PDO::FETCH_ASSOC);
         
         $member = new MemberVO();
-        
         $member->setId($result['id']);
         $member->setName($result['name']);
         $member->setEmail($result['email']);
         $member->setPhone($result['phone']);
-        
         return $member;
     }
     

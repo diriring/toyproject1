@@ -7,6 +7,8 @@ class ReplyDAO {
     
     private $pdo;
     
+    // $this->pdo = $conn->getPdo();
+    
     // PDO 객체 생성
     public function getPdo() {
         $conn = new DBconn();
@@ -18,10 +20,19 @@ class ReplyDAO {
     
     // 댓글 목록 조회
     public function getList($bnum) {
+//         $sql = 'SELECT
+//                     rnum,
+//                     id,
+//                 FROM
+//                     REPLY
+//                 WHERE'
+        
         $sql = "SELECT rnum, id, bnum, content, regDate FROM REPLY WHERE bnum = :bnum";
         $stmt = $this->getPdo()->prepare($sql);
         $stmt->bindValue(':bnum', $bnum, PDO::PARAM_INT);
-        $stmt->execute();
+        $result = $stmt->execute();
+        
+        var_dump($result);
         
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         

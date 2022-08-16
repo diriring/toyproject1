@@ -19,7 +19,7 @@ function getReplyList() {
 			console.log(data);
 		},
 		error: function() {
-			alert("댓글 등록 에러");
+			alert("댓글 조회 에러");
 		}
 	});
 }

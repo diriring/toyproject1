@@ -24,19 +24,13 @@ class MemberMapper {
 }
 
 $mapper = new MemberMapper();
-
 if (isset($_POST["call_name"])) {
-    
-    switch($_POST["call_name"]) {
-        
+    switch ($_POST["call_name"]) {
         case "test":
             echo $mapper->test($_POST['id']);
-            return;
-            
+            break;
         case "getMyInfo":
             echo $mapper->getMyInfo($_POST['id']);
-            return;
-            
-
+            break;
     };
 }

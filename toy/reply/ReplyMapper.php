@@ -3,9 +3,7 @@
 require_once './ReplyService.php';
 
 class ReplyMapper {
-    
     private $service;
-    
     public function getService() {
         $this->service = new ReplyService();
         return $this->service;
@@ -26,15 +24,25 @@ class ReplyMapper {
     }
 }
 
-
 $mapper = new ReplyMapper();
-
 if (isset($_POST["call_name"])) {
     
     switch($_POST["call_name"]) {
-
         case "getList":
             echo $mapper->getList($_POST['bnum']);
-            return;   
+            ;   
     };
+    
+    $data;
+    
+    $arr['status'] = true;
+    $arr['desc'] = 'success';
+    $arr['result'] = $replyList;
+    return json_ecnode($arr);
 }
+
+// {"stauts", "desc" , "data or result"}
+
+// 500
+// 200
+// 400 

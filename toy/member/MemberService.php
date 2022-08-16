@@ -64,7 +64,6 @@ class MemberService {
     //회원가입
     public function setAdd() {
         $result = $this->getDao()->setAdd($_POST);
-        
         return $result;
            
     }

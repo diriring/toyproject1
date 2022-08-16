@@ -3,9 +3,15 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/board/BoardDAO.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/util/Pager.php';
 
+/**
+ * 게시판 서비스
+ */
 class BoardService {
     
-    //게시글 목록 조회
+    /**
+     * 게시글 목록 조회
+     * @param int $pn
+     */
     public function getList($pn) {
         $dao = new BoardDAO();
         
@@ -17,7 +23,9 @@ class BoardService {
         return $result;
     }
     
-    //게시글 수 조회
+    /**
+     * 게시글 수 조회
+     */
     public function getTotalCount() {
         $dao = new BoardDAO();
         

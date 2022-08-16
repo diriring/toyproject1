@@ -19,14 +19,12 @@ class ReplyService {
     
     // 댓글 등록
     public function setAdd() {
-        $result = $this->getDao()->setAdd($_POST);
-        return $result;
+        return $this->getDao()->setAdd($_POST);
     }
 }
 
 
 $service = new ReplyService();
-
 if (isset($_POST["call_name"])) {
     switch($_POST["call_name"]) {
         case "setAdd":
