@@ -37,7 +37,7 @@ require_once '../temp/bootstrap.php';
 		console.log("클릭");
 		$.ajax({
 			type: "POST",
-			url: "/member/MemberService.php/",
+			url: "/member/MemberMapper.php/",
 			data: {
 				id: $("#deleteBtn").attr("data-id"),
 				password: $("#password").val(),

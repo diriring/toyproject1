@@ -37,7 +37,7 @@ require_once '../temp/bootstrap.php';
 		
 		$.ajax({
 			type: "POST",
-			url: "/member/MemberService.php",
+			url: "/member/MemberMapper.php",
 			data: {
 				id: $("#id").val(),
 				password: $("#password").val(),

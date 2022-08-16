@@ -35,7 +35,7 @@ $("#joinBtn").on("click", function() {
 		alert("전화번호 형식을 확인해주세요.");
 		return false;
 	}
-	
+
 	submitAjax();
 });
 
@@ -69,7 +69,7 @@ $("#idCheckBtn").on("click", function() {
 	console.log($("#id").val());
 	$.ajax({
 		type: "POST",
-		url: "/member/MemberService.php",
+		url: "/member/MemberMapper.php",
 		data: {
 			id: $("#id").val(),
 			call_name: "getIdCheck"
@@ -95,7 +95,7 @@ $("#emailCheckBtn").on("click", function() {
 	console.log($("#email").val());
 		$.ajax({
 		type: "POST",
-		url: "/member/MemberService.php",
+		url: "/member/MemberMapper.php",
 		data: {
 			email: $("#email").val(),
 			call_name: "getEmailCheck"
@@ -187,7 +187,7 @@ function chkPhone() {
 function submitAjax() {
 	$.ajax({
 		type: "POST",
-		url: "/member/MemberService.php",
+		url: "/member/MemberMapper.php",
 		data: {
 			id: $("#id").val(),
 			password: $("#password").val(),

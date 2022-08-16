@@ -29,7 +29,7 @@ $("#updateBtn").on("click", function() {
 	console.log("클릭");
 	$.ajax({
 		type: "POST",
-		url: "/member/MemberService.php",
+		url: "/member/MemberMapper.php",
 		data: {
 			name: $("#name").val(),
 			email: $("#email").val(),

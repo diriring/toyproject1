@@ -55,10 +55,10 @@
 		console.log("로그아웃 클릭");
 		$.ajax({
 			type: "POST",
-    		url: "/member/MemberService.php",
+    		url: "/member/MemberMapper.php",
     		data: {
 
-    			call_name: "logout"
+    			call_name: "getLogout"
     		},
     		success: function() {
 				location.href = "/index.php";

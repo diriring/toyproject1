@@ -1,6 +1,7 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/member/MemberDAO.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/member/MemberVO.php';
 
 class MemberService {
     
@@ -11,9 +12,9 @@ class MemberService {
     }
     
     //로그인
-    public function getLogin() {
+    public function getLogin($id, $password) {
             //DB조회
-            $result = $this->dao->getLogin($_POST['id'], $_POST['password']);
+            $result = $this->dao->getLogin($id, $password);
             
             $res = 0;
             
@@ -43,42 +44,42 @@ class MemberService {
     }
     
     //아이디 중복 체크
-    public function getIdCheck() {
-        $result = $this->dao->getIdCheck($_POST['id']);
+    public function getIdCheck($id) {
+        $result = $this->dao->getIdCheck($id);
         
         return $result;
     }
     
     //이메일 중복 체크
-    public function getEmailCheck() {
-        $result = $this->dao->getEmailCheck($_POST['email']);
+    public function getEmailCheck($email) {
+        $result = $this->dao->getEmailCheck($email);
 
         return $result;
     }
     
     //회원가입
-    public function setAdd() {
-        $result = $this->dao->setAdd($_POST);
+    public function setAdd($id, $password, $name, $email, $phone) {
+        $result = $this->dao->setAdd($id, $password, $name, $email, $phone);
         return $result;
            
     }
     
     //회원 정보 수정
-    public function setUpdate() {
-        $result = $this->dao->setUpdate($_POST);
+    public function setUpdate($id, $name, $email, $phone) {
+        $result = $this->dao->setUpdate($id, $name, $email, $phone);
         
         return $result;
     }
     
     //회원 탈퇴 처리
-    public function setMemberDelete() {
-        $return = $this->dao->getPW($_POST['id']);
+    public function setMemberDelete($id, $password) {
+        $return = $this->dao->getPW($id);
         $pw = $return['password'];
         
         $result = 3;
         
-        if ($_POST['password'] == $pw) {
-            $result = $this->dao->setMemberDelete($_POST['id']);
+        if ($password == $pw) {
+            $result = $this->dao->setMemberDelete($id);
             if($result == 1) {
                 session_start();
                 session_destroy();
@@ -88,32 +89,5 @@ class MemberService {
         return $result;
     }
     
-}
-
-$service = new MemberService();
-if (isset($_POST["call_name"])) {
-    switch($_POST["call_name"]) {
-        case "getLogin":
-            echo $service->getLogin();
-            return;
-        case "setAdd":
-            echo $service->setAdd();
-            return;
-        case "setUpdate":
-            echo $service->setUpdate();
-            return;
-        case "setMemberDelete":
-            echo $service->setMemberDelete();
-            return;
-        case "logout":
-            echo $service->getLogout();
-            return;
-        case "getIdCheck":
-            echo $service->getIdCheck();
-            return;
-        case "getEmailCheck":
-            echo $service->getEmailCheck();
-            return;
-    };
 }
 

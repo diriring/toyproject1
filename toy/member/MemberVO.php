@@ -10,6 +10,13 @@ class MemberVO {
     private $regDate;
     private $idDel;
     
+    public function __construct($id, $password, $name, $email, $phone) {
+        $this->id = $id;
+        $this->password = $password;
+        $this->name = $name;
+        $this->email = $email;
+        $this->phone = $phone;
+    }
 
     /**
      * @return mixed
