@@ -6,20 +6,19 @@ class ReplyService {
     
     private $dao;
     
-    public function getDao() {
+    public function __construct() {
         $this->dao = new ReplyDAO();
-        return $this->dao;
     }
     
     //댓글 목록 조회
     public function getList($bnum) {
-        $result = $this->getDao()->getList($bnum);
+        $result = $this->dao->getList($bnum);
         return $result;
     }
     
     // 댓글 등록
     public function setAdd() {
-        return $this->getDao()->setAdd($_POST);
+        return $this->dao->setAdd($_POST);
     }
 }
 

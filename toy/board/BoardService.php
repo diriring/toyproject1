@@ -8,17 +8,21 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/util/Pager.php';
  */
 class BoardService {
     
+    private $dao;
+    
+    public function __construct() {
+        $this->dao = new BoardDAO();
+    }
+    
     /**
      * 게시글 목록 조회
      * @param int $pn
      */
     public function getList($pn) {
-        $dao = new BoardDAO();
         
         $pager = new Pager(5, $pn);
         $pager->makeRow();
-        
-        $result = $dao->getList($pager->getStartRow(), $pager->getPerPage());
+        $result = $this->dao->getList($pager->getStartRow(), $pager->getPerPage());
         
         return $result;
     }
@@ -27,71 +31,46 @@ class BoardService {
      * 게시글 수 조회
      */
     public function getTotalCount() {
-        $dao = new BoardDAO();
-        
-        $result = $dao->getTotalCount();
+
+        $result = $this->dao->getTotalCount();
         
         return $result;
     }
     
     //게시글 정보 조회
     public function getDetail($bnum) {
-        $dao = new BoardDAO();
         
-        $dao->setCountHit($bnum);
-        $result = $dao->getDetail($bnum);
+        $this->dao->setCountHit($bnum);
+        $result = $this->dao->getDetail($bnum);
         
         return $result;
     }
     
     //게시글 등록
-    public function setAdd() {
+    public function setAdd($id, $title, $content) {
         
-        $dao = new BoardDAO();
-        $result = $dao->setAdd($_POST);
+        $board = array('id'=>$id, 'title'=>$title, 'content'=>$content);
+        $result = $this->dao->setAdd($board);
         
         return $result;
     }
     
     //게시글 수정
-    public function setUpdate() {
+    public function setUpdate($bnum, $title, $content) {
         
-        $dao = new BoardDAO();
-        $result = $dao->setUpdate($_POST);
+        $board = array('bnum'=>$bnum, 'title'=>$title, 'content'=>$content);
+        $result = $this->dao->setUpdate($board);
         
         return $result;
     }
     
     //게시글 삭제
     public function setDelete($bnum) {
-        $dao = new BoardDAO();
-        $result = $dao->setDelete($bnum);
+
+        $result = $this->dao->setDelete($bnum);
         
         return $result;
         
-//         if($result == 1) {
-//             echo "<script>alert(\"삭제 성공\"); location.href = \"/view/boardList.php\";</script>";
-//         }else {
-//             echo "<script>alert(\"삭제 실패\"); location.href = \"/view/boardList.php\";</script>";
-//         }
     }
 }
 
-$service = new BoardService();
-if (isset($_POST["call_name"])) {
-    
-    switch($_POST["call_name"]) {
-        
-        case "setAdd":
-            echo $service->setAdd();
-            return;
-        
-        case "setUpdate":
-            echo $service->setUpdate();
-            return;
-       
-    };
-}
-if($_GET["call_name"] == "setDelete") {
-    echo $service->setDelete();
-}

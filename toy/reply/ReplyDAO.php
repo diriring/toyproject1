@@ -7,15 +7,11 @@ class ReplyDAO {
     
     private $pdo;
     
-    // $this->pdo = $conn->getPdo();
-    
-    // PDO 객체 생성
-    public function getPdo() {
+    public function __construct() {
         $conn = new DBconn();
         $this->pdo = $conn->getPdo();
-        return $this->pdo;
     }
-    
+
     // 댓글 개수 카운트
     
     // 댓글 목록 조회
@@ -27,12 +23,20 @@ class ReplyDAO {
 //                     REPLY
 //                 WHERE'
         
-        $sql = "SELECT rnum, id, bnum, content, regDate FROM REPLY WHERE bnum = :bnum";
-        $stmt = $this->getPdo()->prepare($sql);
-        $stmt->bindValue(':bnum', $bnum, PDO::PARAM_INT);
-        $result = $stmt->execute();
+        $sql = 'SELECT 
+                    rnum, 
+                    id, 
+                    bnum, 
+                    content, 
+                    regDate 
+                FROM 
+                    REPLY 
+                WHERE 
+                    bnum = :bnum';
         
-        var_dump($result);
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':bnum', $bnum, PDO::PARAM_INT);
+        $stmt->execute();
         
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
@@ -41,11 +45,14 @@ class ReplyDAO {
     
     // 댓글 등록
     public function setAdd($array) {
-        $sql = "
-                INSERT INTO REPLY (id, bnum, content, regDate)
-                VALUES (:id, :bnum, :content, NOW())
-                ";
-        $stmt = $this->getPdo()->prepare($sql);
+        
+        $sql = 'INSERT INTO 
+                    REPLY 
+                    (id, bnum, content, regDate)
+                VALUES 
+                    (:id, :bnum, :content, NOW())';
+        
+        $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':id', $array['id'], PDO::PARAM_STR);
         $stmt->bindValue(':bnum', $array['bnum'], PDO::PARAM_INT);
         $stmt->bindValue(':content', $array['content'], PDO::PARAM_STR);

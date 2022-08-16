@@ -1,20 +1,19 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/util/Pager.php';
 require_once './BoardService.php';
-// require_once '../board/BoardVO.php';
+require_once './BoardVO.php';
 
 class BoardMapper {
     
     private $service;
     
-    public function getService() {
+    public function __construct() {
         $this->service = new BoardService();
-        return $this->service;
     }
     
     //게시글 목록 조회
     public function getList($pn) {
-        $list = $this->getService()->getList($pn);
+        $list = $this->service->getList($pn);
         $boardList = array();
         
         foreach ($list as $row) {
@@ -35,7 +34,7 @@ class BoardMapper {
             }
         
             $pager = new Pager(5, $pn);
-            $totalCount = $this->getService()->getTotalCount();
+            $totalCount = $this->service->getTotalCount();
             $pager->makeNum($totalCount);
             
             $array = array('startNum'=>$pager->getStartNum(), 'lastNum'=>$pager->getLastNum(),
@@ -48,15 +47,27 @@ class BoardMapper {
     
     //게시글 상세 조회
     public function getDetail($bnum) {
-        $board = $this->getService()->getDetail($bnum);
+        $board = $this->service->getDetail($bnum);
         $json = json_encode($board);
         
         return $json;
     }
     
+    public function setAdd($id, $title, $content) {
+        
+        $result = $this->service->setAdd($id, $title, $content);
+        return $result;        
+    }
+    
+    public function setUpdate($bnum, $title, $content) {
+        $result = $this->service->setUpdate($bnum, $title, $content);
+        return $result;   
+    }
+    
+    
     //게시글 삭제
     public function setDelete($bnum) {
-        $result = $this->getService()->setDelete($bnum);
+        $result = $this->service->setDelete($bnum);
         
         return $result;
     }
@@ -64,21 +75,32 @@ class BoardMapper {
 
 $mapper = new BoardMapper();
 
-if (isset($_POST["call_name"])) {
+if (isset($_POST['call_name'])) {
     
-    switch($_POST["call_name"]) {
+    switch($_POST['call_name']) {
         
-        case "getList":
+        case 'getList':
             echo $mapper->getList($_POST['pn']);
-            return;
-        case "getPage":
+            break;
+            
+        case 'getPage':
             echo $mapper->getPage();
-            return;
-        case "getDetail":
+            break;
+            
+        case 'getDetail':
             echo $mapper->getDetail($_POST['bnum']);
-            return;
-        case "setDelete":
+            break;
+            
+        case 'setAdd':
+            echo $mapper->setAdd($_POST['id'], $_POST['title'], $_POST['content']);
+            break;
+            
+        case 'setUpdate':
+            echo $mapper->setUpdate($_POST['bnum'], $_POST['title'], $_POST['content']);
+            break;
+            
+        case 'setDelete':
             echo $mapper->setDelete($_POST['bnum']);
-            return;
+            break;
     };
 }

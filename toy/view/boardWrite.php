@@ -62,7 +62,7 @@ session_start();
 //     	console.log("클릭");
     	$.ajax({
     		type: "POST",
-    		url: "/board/BoardService.php",
+    		url: "/board/BoardMapper.php",
     		data: {
     			id: $("#id").val(),
     			title: $("#title").val(),

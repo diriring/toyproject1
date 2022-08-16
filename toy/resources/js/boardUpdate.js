@@ -44,7 +44,7 @@ $("#updateBtn").on("click", function() {
 	
 	$.ajax({
 		type: "POST",
-		url: "/board/BoardService.php",
+		url: "/board/BoardMapper.php",
 		data: {
 			title: $("#title").val(),
 			content: $("#content").val(),

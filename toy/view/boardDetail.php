@@ -24,7 +24,7 @@ session_start();
     	<div class="container mt-5">
         	<input type="hidden" id="sessionId" value="<?php echo $_SESSION['id'];?>">
         	
-        	<table class="table table-striped table-hover" id="detailResult">
+        	<table class="table" id="detailResult">
         		<colgroup>
     				<col width="55%"/>
     				<col width="15%"/>
@@ -45,7 +45,21 @@ session_start();
 				<button type="button" class="btn btn-outline-secondary mt-3" id="replyAddBtn">등록</button>
         	</div>
         	
-        	<table id="replyResult">
+        	<table class="table" id="replyResult">
+        		<colgroup>
+    				<col width="55%"/>
+    				<col width="15%"/>
+    				<col width="15%"/>
+    				<col width="15%"/>
+    			</colgroup>
+    			<thead>
+    				<tr>
+    					<td>댓글</td>
+    					<td>작성자</td>
+    					<td>작성 날짜</td>
+    					<td></td>
+    				</tr>
+    			</thead>
         	</table>
         	
         	

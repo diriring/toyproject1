@@ -5,9 +5,8 @@ class MemberMapper {
     
     private $service;
     
-    public function getService() {
+    public function __construct() {
         $this->service = new MemberService();
-        return $this->service;
     }
     
     public function test($id) {
@@ -15,7 +14,7 @@ class MemberMapper {
     }
     
     public function getMyInfo($id) {
-        $member = $this->getService()->getMyInfo($id);
+        $member = $this->service->getMyInfo($id);
         $array = array('id'=>$member->getId(), 'name'=>$member->getName(), 'email'=>$member->getEmail(), 'phone'=>$member->getPhone());
         $json = json_encode($array);
         return $json;
