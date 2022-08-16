@@ -38,14 +38,25 @@ session_start();
 			<div id="buttons">
 			</div>
         
+        	<div>
+        		<div id="comment-count">댓글 <span id="count">0</span></div>
+				<input type="hidden" id="sessionId" value="<?php echo $_SESSION['id'];?>">
+				<textarea id="replyContent" class="form-control" rows="3"></textarea>
+				<button type="button" class="btn btn-outline-secondary mt-3" id="replyAddBtn">등록</button>
+        	</div>
+        	
+        	<table id="replyResult">
+        	</table>
         	
         	
         </div>
     </div>
 
+<script src="../resources/js/boardReply.js"></script>
 <script src="../resources/js/boardDetail.js"></script>
 <script>
     getDetail();
+    getReplyList();
 </script>
 
 

@@ -54,25 +54,64 @@ $("#buttons").on("click", "#delBtn", function () {
 	
 	$.ajax({
     	type: "POST",
-    		url: "/board/BoardMapper.php",
-    		data: {
-    			bnum: bnum,
-    			call_name: "setDelete"
-    		},
-    		success: function(result) {
-    			if(result == 1) {
-    				alert("삭제 성공");
-    				location.href="./boardList.php";
-    				
-    			}else {
-    				alert("삭제 실패");
-    				location.href="./boardList.php";
-    			}
-    		},
-    		error: function() {
-    			alert("삭제 에러");
-    		}
+		url: "/board/BoardMapper.php",
+		data: {
+			bnum: bnum,
+			call_name: "setDelete"
+		},
+		success: function(result) {
+			if(result == 1) {
+				alert("삭제 성공");
+				location.href="./boardList.php";
+				
+			}else {
+				alert("삭제 실패");
+				location.href="./boardList.php";
+			}
+		},
+		error: function() {
+			alert("삭제 에러");
+		}
 	});
+});
+
+$("#replyAddBtn").on("click", function() {
+	
+	//console.log("댓글 클릭");
+	//console.log($("#replyContent").val());
+	
+	//현재 url에서 파라미터 조회
+	const url = new URL(window.location.href);
+	const urlParams = url.searchParams;
+	
+	//파라미터에서 글 번호 찾기
+	let bnum = urlParams.get('bnum');
+	
+	$.ajax({
+		type: "POST",
+		url: "/reply/ReplyService.php",
+		data: {
+			bnum: bnum,
+			id: $("#sessionId").val(),
+			content: $("#replyContent").val(),
+			call_name: "setAdd"
+		},
+		success: function(result) {
+			if(result == 1) {
+				alert("댓글 등록 성공");
+				location.href="./boardList.php";
+				
+			}else {
+				alert("댓글 등록 실패");
+				location.href="./boardList.php";
+			}
+		},
+		error: function() {
+			alert("댓글 등록 에러");
+		}
+
+	});
+	
 });
 
 //조회 정보 html 작성
