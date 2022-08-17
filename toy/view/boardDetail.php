@@ -33,19 +33,18 @@ session_start();
     			</colgroup>
         		
         	</table>
-			
-			
-			<div id="buttons">
-			</div>
         
         	<div>
-        		<div id="comment-count">댓글 <span id="count">0</span></div>
+        		<div id="comment-count">댓글 <span id="count"></span></div>
 				<input type="hidden" id="sessionId" value="<?php echo $_SESSION['id'];?>">
 				<textarea id="replyContent" class="form-control" rows="3"></textarea>
-				<button type="button" class="btn btn-outline-secondary mt-3" id="replyAddBtn">등록</button>
+				<div class="mb-3">
+					<button type="button" class="btn btn-outline-secondary mt-3" id="replyAddBtn">등록</button>
+					<button type="button" class="btn btn-outline-secondary mt-3" onclick="getReplyList()" id="refreshBtn">댓글 새로고침</button>
+        		</div>
         	</div>
         	
-        	<table class="table" id="replyResult">
+        	<table class="table">
         		<colgroup>
     				<col width="55%"/>
     				<col width="15%"/>
@@ -60,19 +59,38 @@ session_start();
     					<td></td>
     				</tr>
     			</thead>
+    			<tbody id="replyResult">
+    			</tbody>
         	</table>
         	
         	
+        </div>
+        
+    </div>
+    
+    <!-- 댓글 수정 모달 -->
+    <div class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="updateModal">
+		<div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            	<div class="modal-header">
+                	<h5 class="modal-title">댓글 수정</h5>
+                	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            <div class="modal-body">
+                <p>수정 할 내용을 입력해주세요.</p>
+                <input type="hidden" id="rnum" value="">
+                <textarea id="modalText" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" id="modalUpdateBtn" class="btn btn-primary">수정</button>
+            </div>
+          </div>
         </div>
     </div>
 
 <script src="../resources/js/boardReply.js"></script>
 <script src="../resources/js/boardDetail.js"></script>
-<script>
-    getDetail();
-    getReplyList();
-</script>
-
 
 </body>
 </html>

@@ -51,6 +51,14 @@ session_start();
 	</div>
 
 <script type="text/javascript">
+	$( document ).ready(function() {
+		if($("#id").val() == "") {
+    		alert("로그인 후 이용해주세요.");
+    		location.href="../index.php";
+    		return false;
+    	}
+	});
+	
 	$("#content").summernote({
 		height: 400,
 		width: 1210

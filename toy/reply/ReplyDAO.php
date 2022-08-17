@@ -12,16 +12,12 @@ class ReplyDAO {
         $this->pdo = $conn->getPdo();
     }
 
-    // 댓글 개수 카운트
-    
-    // 댓글 목록 조회
+
+    /**
+     * 댓글 목록 조회
+     * @param int $bnum
+     */
     public function getList($bnum) {
-//         $sql = 'SELECT
-//                     rnum,
-//                     id,
-//                 FROM
-//                     REPLY
-//                 WHERE'
         
         $sql = 'SELECT 
                     rnum, 
@@ -43,8 +39,13 @@ class ReplyDAO {
         return $result;
     }
     
-    // 댓글 등록
-    public function setAdd($array) {
+    /**
+     * 댓글 등록
+     * @param int $bnum
+     * @param string $id
+     * @param string $content
+     */
+    public function setAdd($bnum, $id, $content) {
         
         $sql = 'INSERT INTO 
                     REPLY 
@@ -53,9 +54,51 @@ class ReplyDAO {
                     (:id, :bnum, :content, NOW())';
         
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':id', $array['id'], PDO::PARAM_STR);
-        $stmt->bindValue(':bnum', $array['bnum'], PDO::PARAM_INT);
-        $stmt->bindValue(':content', $array['content'], PDO::PARAM_STR);
+        $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+        $stmt->bindValue(':bnum', $bnum, PDO::PARAM_INT);
+        $stmt->bindValue(':content', $content, PDO::PARAM_STR);
+        $stmt->execute();
+        
+        $count = $stmt->rowCount();
+        
+        return $count;
+    }
+    
+    /**
+     * 댓글 삭제
+     * @param int $rnum
+     */
+    public function setDelete($rnum) {
+        $sql = 'DELETE FROM 
+                    REPLY 
+                WHERE 
+                    rnum = :rnum';
+        
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':rnum', $rnum, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $count = $stmt->rowCount();
+        
+        return $count;
+    }
+    
+    /**
+     * 댓글 수정
+     * @param int $rnum
+     * @param string $content
+     */
+    public function setUpdate($rnum, $content) {
+        $sql = 'UPDATE 
+                    REPLY 
+                SET 
+                    content = :content 
+                WHERE 
+                    rnum = :rnum';
+        
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':content', $content, PDO::PARAM_STR);
+        $stmt->bindValue(':rnum', $rnum, PDO::PARAM_INT);
         $stmt->execute();
         
         $count = $stmt->rowCount();
