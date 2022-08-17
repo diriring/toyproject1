@@ -67,6 +67,18 @@ class BoardMapper {
         // echo print_r($boardList);
         return $json;
     }
+    
+    public function getSearchPage($pn, $kind, $search) {
+        $array = $this->service->getSearchPage($pn, $kind, $search);
+        
+        $json = json_encode($array);
+        
+        return $json;
+    }
+    
+    public function getTotalSearch($kind, $search) {
+        return $this->service->getTotalSearch($kind, $search);
+    }
 }
 
 $mapper = new BoardMapper();
@@ -101,6 +113,14 @@ if (isset($_POST['call_name'])) {
             
         case 'getSearch':
             echo $mapper->getSearch($_POST['pn'], $_POST['kind'], $_POST['search']);
+            break;
+            
+        case 'getSearchPage':
+            echo $mapper->getSearchPage($_POST['pn'], $_POST['kind'], $_POST['search']);
+            break;
+            
+        case 'getTotalSearch':
+            echo $mapper->getTotalSearch($_POST['kind'], $_POST['search']);
             break;
     };
 }

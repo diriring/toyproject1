@@ -41,7 +41,7 @@ class BoardDAO {
         
     }
     
-    public function getTotalCount($kind, $search) {
+    public function getTotalCount() {
         $sql = 'SELECT 
                     COUNT(bnum) 
                 FROM 
@@ -197,6 +197,50 @@ class BoardDAO {
 //         $result = array('startRow'=>$startRow, 'perPage'=>$perPage, 'kind'=>$kind, 'search'=>$search);
         
         return $result;
+    }
+    
+    public function getTotalSearch($kind, $search) {
+        $sql = '';
+        switch($kind) {
+            
+            case 'title':
+                $sql = 'SELECT
+                            COUNT(bnum)
+                        FROM
+                            BOARD
+                        WHERE
+                            title LIKE CONCAT("%", :search, "%")';
+                break;
+                
+            case 'content':
+                $sql = 'SELECT
+                            COUNT(bnum)
+                        FROM
+                            BOARD
+                        WHERE
+                            content LIKE CONCAT("%", :search, "%")';
+                break;
+                
+            case 'id':
+                $sql = 'SELECT
+                            COUNT(bnum)
+                        FROM
+                            BOARD
+                        WHERE
+                            id LIKE CONCAT("%", :search, "%")';
+                break;
+        }
+
+        
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':search', $search, PDO::PARAM_STR);
+        $stmt->execute();
+        
+        //행의 첫번째 컬럼을 리턴
+        $result = $stmt->fetchColumn();
+        
+        return $result;
+        
     }
     
 }

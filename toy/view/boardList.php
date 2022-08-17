@@ -65,7 +65,7 @@ session_start();
 
 <script src = "../resources/js/boardList.js"></script>
 <script>
-	getList();
+	getList('title', '', 1, false);
 </script>
 </body>
 

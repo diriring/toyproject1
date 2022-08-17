@@ -105,5 +105,22 @@ class BoardService {
         
         return $boardList;
     }
+    
+    public function getSearchPage($pn, $kind, $search) {
+        
+        $pager = new Pager(5, $pn);
+        
+        $totalCount = $this->dao->getTotalSearch($kind, $search);
+        
+        $pager->makeNum($totalCount);
+        
+        $array = array('startNum'=>$pager->getStartNum(), 'lastNum'=>$pager->getLastNum(),
+                        'pre'=>$pager->getPre(), 'next'=>$pager->getNext(), 'totalCount'=>$totalCount);
+        return $array;
+    }
+    
+    public function getTotalSearch($kind, $search) {
+        return $this->dao->getTotalSearch($kind, $search);
+    }
 }
 

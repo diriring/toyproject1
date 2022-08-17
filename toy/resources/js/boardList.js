@@ -1,40 +1,28 @@
 $("#searchBtn").on("click", function() {
 	
-	console.log($("#kind").val());
+	//url에서 파라미터 제거
+	history.replaceState({}, null, location.pathname);
+	
+	let kind = $("#kind").val();
+	let search = $("#search").val();
+	
+	getList(kind, search, 1, true);
 
-	const url = new URL(window.location.href);
-	const urlParams = url.searchParams;
 	
-	//파라미터에서 페이지 번호 찾기
-	let pn = urlParams.get('pn');
-	
-	if(!urlParams.has('pn')) {
-		pn = 1;
-	};
-	
-	$.ajax({
-		type: "POST",
-		url: "/board/BoardMapper.php",
-		data: {
-			pn: pn,
-			kind: $("#kind").val(),
-			search: $("#search").val(),
-			call_name: "getSearch"
-		},
-		success: function(result) {
-			//console.log(result);
-			let data = JSON.parse(result);
-			console.log(data);
-			boardHtml(data);
-		}
-	});
 });
 
-// 게시글 목록 조회 및 페이지 생성	
-function getList() {
+$("#pageResult").on("click", ".pager", function(event) {
 	
-	//console.log($("#kind").val());
-	//console.log($("#search").val());
+	let kind = $(event.target).attr("data-kind");	
+	let search = $(event.target).attr("data-search");
+	let pn = $(event.target).attr("data-pn");
+
+	getList(kind, search, pn, true);
+
+})
+
+// 게시글 목록 조회 및 페이지 생성	
+function getList(kindInput, searchInput, pnInput, searchCheck) {
 	
 	//현재 url에서 파라미터 조회
 	const url = new URL(window.location.href);
@@ -43,8 +31,30 @@ function getList() {
 	//파라미터에서 페이지 번호 찾기
 	let pn = urlParams.get('pn');
 	
+	
 	if(!urlParams.has('pn')) {
-		pn = 1;
+		pn = pnInput;
+	};
+	
+	console.log(pn);
+	//검색 추가
+	let kind = urlParams.get('kind');
+	
+	
+	if(!urlParams.has('kind')) {
+		kind = kindInput;
+	};
+	
+	let search = urlParams.get('search');
+	
+	
+	if(!urlParams.has('search')) {
+		search = searchInput;
+	};
+	
+	if(searchCheck) {
+		$("#kind").val(kind);
+		$("#search").val(search);
 	};
 	
 	$.ajax({
@@ -52,13 +62,16 @@ function getList() {
 		url: "/board/BoardMapper.php",
 		data: {
 			pn: pn,
-			call_name: "getList"
+			kind: kind,
+			search: search,
+			call_name: "getSearch"
 		},
 		success: function(result) {
  			//console.log(result);
 			let data = JSON.parse(result);
 			//console.log(data);
-			boardHtml(data);
+			
+			boardHtml(data, kind, search);
 
 		},
 		error: function() {
@@ -71,13 +84,21 @@ function getList() {
 		url: "/board/BoardMapper.php",
 		data: {
 			pn: pn,
-			call_name: "getPage"
+			kind: kind,
+			search: search,
+			call_name: "getSearchPage"
 		},
 		success: function(result) {
  			//console.log(result);
 			let data = JSON.parse(result);
-			//console.log(data);
-			pageHtml(data);
+			console.log(data);
+			
+			if(searchCheck) {
+				pageSearchHtml(data, kind, search);
+			} else {
+				pageHtml(data);
+			} 
+			
 
 		},
 		error: function() {
@@ -137,6 +158,47 @@ function pageHtml(data) {
 	html += '<span aria-hidden="true">&raquo;</span>';
 		
 	html += '</a>';
+	html += '</li>';
+	html += '</ul>';
+	html += '</nav>';
+	html += '</div>';
+    		
+	$("#pageResult").html(html);
+}
+
+function pageSearchHtml(data, kind, search) {
+		
+		
+	let html = '<div class="col-3">';
+	html += '<nav aria-label="Page navigation example">';
+	html += '<ul class="pagination">';
+	html += '<li class="page-item">';
+		
+	if(data.pre) {
+		html += '<p role="button" class="page-link pager" data-pn="' + data.startNum-1 + '" data-kind="' + kind + '" data-search="' + search + '" aria-label="Previous">';
+	}else {
+		html += '<p role="button" class="page-link pager" data-pn="1" data-kind="' + kind + '" data-search="' + search + '" aria-label="Previous">';
+	}
+
+	html += '<span aria-hidden="true">&laquo;</span>';
+	html += '</p>';
+	html += '<li>';
+    		
+	for(let i=data.startNum; i<data.lastNum+1; i++) {
+		html += '<li class="page-item"><p role="button" class="page-link pager" data-pn="'+ i + '" data-kind="' + kind + '" data-search="' + search +'">' + i + '</p></li>';
+	};
+    		
+	html += '<li class="page-item">';
+    		
+	if(data.next) {
+		html += '<p role="button" class="page-link pager" data-pn="' + data.lastNum+1 + '" data-kind="' + kind + '" data-search="' + search + '" aria-label="Next">';
+	}else {
+		html += '<p role="button" class="page-link pager" data-pn="' + data.lastNum + '" data-kind="' + kind + '" data-search="' + search + '" aria-label="Next">';
+	}
+
+	html += '<span aria-hidden="true">&raquo;</span>';
+		
+	html += '</p>';
 	html += '</li>';
 	html += '</ul>';
 	html += '</nav>';
