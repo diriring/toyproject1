@@ -41,8 +41,14 @@ class BoardDAO {
         
     }
     
-    public function getTotalCount() {
-        $sql = 'SELECT COUNT(bnum) FROM BOARD';
+    public function getTotalCount($kind, $search) {
+        $sql = 'SELECT 
+                    COUNT(bnum) 
+                FROM 
+                    BOARD 
+                WHERE 
+                    bnum > 0';
+
         $stmt = $this->pdo->prepare($sql);
         
         $stmt->execute();
@@ -115,6 +121,82 @@ class BoardDAO {
         $count = $stmt->rowCount();
         
         return $count;
+    }
+    
+    public function getSearch($startRow, $perPage, $kind, $search) {
+        $sql = '';
+        switch($kind) {
+            
+            case 'title':
+                $sql = 'SELECT
+                            bnum,
+                            id,
+                            title,
+                            content,
+                            regDate,
+                            hit
+                        FROM
+                            BOARD
+                        WHERE
+                            title LIKE CONCAT("%", :search, "%")
+                            
+                        ORDER BY
+                            bnum DESC
+                        LIMIT
+                            :startRow, :perPage';
+                break;
+                
+            case 'content':
+                $sql = 'SELECT
+                            bnum,
+                            id,
+                            title,
+                            content,
+                            regDate,
+                            hit
+                        FROM
+                            BOARD
+                        WHERE
+                            content LIKE CONCAT("%", :search, "%")
+                    
+                        ORDER BY
+                            bnum DESC
+                        LIMIT
+                            :startRow, :perPage';
+                break;
+                
+            case 'id':
+                $sql = 'SELECT
+                            bnum,
+                            id,
+                            title,
+                            content,
+                            regDate,
+                            hit
+                        FROM
+                            BOARD
+                        WHERE
+                            id LIKE CONCAT("%", :search, "%")
+                    
+                        ORDER BY
+                            bnum DESC
+                        LIMIT
+                            :startRow, :perPage';
+                break;
+        }
+        
+        
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':startRow', $startRow, PDO::PARAM_INT);
+        $stmt->bindValue(':perPage', $perPage, PDO::PARAM_INT);
+        $stmt->bindValue(':search', $search, PDO::PARAM_STR);
+        $stmt->execute();
+        
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+           
+//         $result = array('startRow'=>$startRow, 'perPage'=>$perPage, 'kind'=>$kind, 'search'=>$search);
+        
+        return $result;
     }
     
 }

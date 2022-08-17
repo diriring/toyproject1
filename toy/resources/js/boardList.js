@@ -1,7 +1,40 @@
+$("#searchBtn").on("click", function() {
+	
+	console.log($("#kind").val());
 
+	const url = new URL(window.location.href);
+	const urlParams = url.searchParams;
+	
+	//파라미터에서 페이지 번호 찾기
+	let pn = urlParams.get('pn');
+	
+	if(!urlParams.has('pn')) {
+		pn = 1;
+	};
+	
+	$.ajax({
+		type: "POST",
+		url: "/board/BoardMapper.php",
+		data: {
+			pn: pn,
+			kind: $("#kind").val(),
+			search: $("#search").val(),
+			call_name: "getSearch"
+		},
+		success: function(result) {
+			//console.log(result);
+			let data = JSON.parse(result);
+			console.log(data);
+			boardHtml(data);
+		}
+	});
+});
 
 // 게시글 목록 조회 및 페이지 생성	
 function getList() {
+	
+	//console.log($("#kind").val());
+	//console.log($("#search").val());
 	
 	//현재 url에서 파라미터 조회
 	const url = new URL(window.location.href);
@@ -37,7 +70,7 @@ function getList() {
 		type: "POST",
 		url: "/board/BoardMapper.php",
 		data: {
-			pn:1,
+			pn: pn,
 			call_name: "getPage"
 		},
 		success: function(result) {
@@ -56,8 +89,9 @@ function getList() {
 	
 // data가 들어오면 html 생성	 (게시판 목록)
 function boardHtml(data){
+	let html = "";
 	$.each(data, function(key, value){
-    	let html = "<tr>";
+    	html += "<tr>";
 		html += "<td>" + value.bnum + "</td>";
 		html += "<td>" + "<a href=\"./boardDetail.php?bnum=" + value.bnum + "\">" + value.title + "</a>" + "</td>";
 		html += "<td>" + value.id + "</td>";
@@ -65,9 +99,9 @@ function boardHtml(data){
 		html += "<td>" + value.hit + "</td>";
     	html += "</tr>";
     	
-    	$("#listResult").append(html);
 	});
    
+	$("#listResult").html(html);
 }
     
 // data가 들어오면 html 생성	 (페이지 버튼)
@@ -108,5 +142,5 @@ function pageHtml(data) {
 	html += '</nav>';
 	html += '</div>';
     		
-	$("#pageResult").append(html);
+	$("#pageResult").html(html);
 }

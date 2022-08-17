@@ -13,32 +13,19 @@ class BoardMapper {
     
     //게시글 목록 조회
     public function getList($pn) {
+        
         $list = $this->service->getList($pn);
-        $boardList = array();
         
-        foreach ($list as $row) {
-            $boardList[] = $row;
-        }
-        
-        $json = json_encode($boardList);
+        $json = json_encode($list);
         
         // echo print_r($boardList);
         return $json;
     }
     
     //페이지 번호
-    public function getPage() {
-            $pn = $_GET['pn'];
-            if($_GET['pn'] == NULL) {
-                $pn = 1;
-            }
-        
-            $pager = new Pager(5, $pn);
-            $totalCount = $this->service->getTotalCount();
-            $pager->makeNum($totalCount);
-            
-            $array = array('startNum'=>$pager->getStartNum(), 'lastNum'=>$pager->getLastNum(),
-                            'pre'=>$pager->getPre(), 'next'=>$pager->getNext());
+    public function getPage($pn) {
+
+            $array = $this->service->getPage($pn);
             
             $json = json_encode($array);
         
@@ -71,6 +58,15 @@ class BoardMapper {
         
         return $result;
     }
+    
+    public function getSearch($pn, $kind, $search) {
+        $list = $this->service->getSearch($pn, $kind, $search);
+        
+        $json = json_encode($list);
+        
+        // echo print_r($boardList);
+        return $json;
+    }
 }
 
 $mapper = new BoardMapper();
@@ -84,7 +80,7 @@ if (isset($_POST['call_name'])) {
             break;
             
         case 'getPage':
-            echo $mapper->getPage();
+            echo $mapper->getPage($_POST['pn']);
             break;
             
         case 'getDetail':
@@ -101,6 +97,10 @@ if (isset($_POST['call_name'])) {
             
         case 'setDelete':
             echo $mapper->setDelete($_POST['bnum']);
+            break;
+            
+        case 'getSearch':
+            echo $mapper->getSearch($_POST['pn'], $_POST['kind'], $_POST['search']);
             break;
     };
 }

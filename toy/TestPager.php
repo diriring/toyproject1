@@ -1,13 +1,9 @@
 <?php
 
-$pre = TRUE;
-$startNum = 3;
+$search = 'as';
 
-$next = true;
-$lastNum = 8;
+$test = '%' . $search . '%';
 
-$result = $next?$lastNum+1:$lastNum;
-
-echo $result;
+echo $test;
 
 

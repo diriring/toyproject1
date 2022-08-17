@@ -24,13 +24,32 @@ class BoardService {
         $pager->makeRow();
         $result = $this->dao->getList($pager->getStartRow(), $pager->getPerPage());
         
-        return $result;
+        $boardList = array();
+        
+        foreach ($result as $row) {
+            $boardList[] = $row;
+        }
+        
+        return $boardList;
+    }
+    
+    public function getPage($pn) {
+        
+        $pager = new Pager(5, $pn);
+
+        $totalCount = $this->dao->getTotalCount();
+        
+        $pager->makeNum($totalCount);
+        
+        $array = array('startNum'=>$pager->getStartNum(), 'lastNum'=>$pager->getLastNum(),
+                        'pre'=>$pager->getPre(), 'next'=>$pager->getNext());
+        return $array;
     }
     
     /**
      * 게시글 수 조회
      */
-    public function getTotalCount() {
+    public function getTotalCount($kind, $search) {
 
         $result = $this->dao->getTotalCount();
         
@@ -71,6 +90,20 @@ class BoardService {
         
         return $result;
         
+    }
+    
+    public function getSearch($pn, $kind, $search) {
+        $pager = new Pager(5, $pn);
+        $pager->makeRow();
+        $result = $this->dao->getSearch($pager->getStartRow(), $pager->getPerPage(), $kind, $search);
+        
+        $boardList = array();
+        
+        foreach ($result as $row) {
+            $boardList[] = $row;
+        }
+        
+        return $boardList;
     }
 }
 

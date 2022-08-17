@@ -29,6 +29,9 @@ class Pager {
 
     public function getPn()
     {
+        if ($this->pn == null) {
+            $this->pn = 1;
+        }
         return $this->pn;
     }
 
@@ -54,13 +57,16 @@ class Pager {
 
     public function getKind()
     {
+        if ($this->kind == null) {
+            $this->kind='title';
+        }
         return $this->kind;
     }
 
     public function getSearch()
     {
         if ($this->search == null) {
-            $this->search="";
+            $this->search='';
         }
         return $this->search;
     }

@@ -18,11 +18,11 @@ session_start();
 	<div class="container">
     	<h1>Board List Page</h1>
     	
-    	<div class="col-2" style="display: inline-block">
+    	<div class="col-2 d-inline-block">
 			<select class="form-select" id="kind" aria-label="Default select example">
-			  <option value="col1">제목</option>
-			  <option value="col2">내용</option>
-			  <option value="col3">작성자</option>
+			  <option value="title">제목</option>
+			  <option value="content">내용</option>
+			  <option value="id">작성자</option>
 			</select>
 		</div>
 		<div class="col-3 d-inline-block">
