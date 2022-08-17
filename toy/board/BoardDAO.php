@@ -14,9 +14,21 @@ class BoardDAO {
     
     public function getList($startRow, $perPage) {
 
-        $sql = 'SELECT * FROM BOARD WHERE bnum > 0
-                ORDER BY bnum DESC
-                LIMIT :startRow, :perPage';
+        $sql = 'SELECT 
+                    bnum, 
+                    id, 
+                    title, 
+                    content, 
+                    regDate, 
+                    hit 
+                FROM 
+                    BOARD 
+                WHERE 
+                    bnum > 0
+                ORDER BY 
+                    bnum DESC
+                LIMIT 
+                    :startRow, :perPage';
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':startRow', $startRow, PDO::PARAM_INT);
         $stmt->bindValue(':perPage', $perPage, PDO::PARAM_INT);

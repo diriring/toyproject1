@@ -18,6 +18,20 @@ session_start();
 	<div class="container">
     	<h1>Board List Page</h1>
     	
+    	<div class="col-2" style="display: inline-block">
+			<select class="form-select" id="kind" aria-label="Default select example">
+			  <option value="col1">제목</option>
+			  <option value="col2">내용</option>
+			  <option value="col3">작성자</option>
+			</select>
+		</div>
+		<div class="col-3 d-inline-block">
+			<div class="input-group mb-3">
+			  <input type="text" id="search" class="form-control" placeholder="검색어를 입력하세요.">
+			  <button class="btn btn-outline-secondary" type="button" id="searchBtn">검색</button>
+			</div>
+		</div>
+    	
     	<table class="table table-striped table-hover">
 			<colgroup>
 				<col width="12%"/>
