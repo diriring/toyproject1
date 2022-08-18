@@ -40,9 +40,6 @@ $("#replyAddBtn").on("click", function() {
 		return false;
 	}
 	
-	//console.log("댓글 클릭");
-	//console.log($("#replyContent").val());
-	
 	//현재 url에서 파라미터 조회
 	const url = new URL(window.location.href);
 	const urlParams = url.searchParams;
@@ -116,7 +113,6 @@ $("#replyResult").on("click", ".replyUpdateBtn", function(event) {
 });
 
 $("#modalUpdateBtn").on("click", function() {
-	console.log("모달 수정 클릭");
 	
 	$.ajax({
 		type: "POST",
