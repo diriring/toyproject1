@@ -104,9 +104,10 @@ class BoardDAO {
     }
     
     public function setDelete($bnum) {
-        $sql = 'DELETE FROM BOARD WHERE bnum = ?';
+        $sql = 'DELETE FROM BOARD WHERE bnum = :bnum';
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(array($bnum));
+        $stmt->bindValue(':bnum', $bnum, PDO::PARAM_INT);
+        $stmt->execute();
         
         $count = $stmt->rowCount();
         

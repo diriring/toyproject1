@@ -56,6 +56,14 @@ $("#buttons").on("click", "#delBtn", function () {
 	//파라미터에서 글 번호 찾기
 	let bnum = urlParams.get('bnum');
 	
+	let src = new Array();
+	$("#content img").each(function(index, item) {
+		let path = ".." + item.src.substring(15);
+		src[index] = path;
+	});
+	
+	console.log(src);
+	
 	$.ajax({
     	type: "POST",
 		url: "/board/BoardMapper.php",
@@ -65,6 +73,9 @@ $("#buttons").on("click", "#delBtn", function () {
 		},
 		success: function(result) {
 			if(result == 1) {
+				
+				src.forEach((path)=>fileDelete(path));
+				
 				alert("삭제 성공");
 				location.href="./boardList.php";
 				
@@ -76,9 +87,22 @@ $("#buttons").on("click", "#delBtn", function () {
 		error: function() {
 			alert("삭제 에러");
 		}
-	});
+	});	
+	
 });
 
+function fileDelete(fileName) {
+	$.ajax({
+		type: "POST",
+		url: "/util/fileDelete.php",
+		data: {
+			fileName: fileName
+		},
+		success: function(data) {
+			console.log(data);
+		}
+	});
+}
 
 //조회 정보 html 작성
 function detailHtml(data) {
@@ -100,7 +124,7 @@ function detailHtml(data) {
 	html += '</tr>';
 	
 	html += '<tr>';
-	html += '<td colspan="4">' + data.content + '</td>';
+	html += '<td colspan="4" id="content">' + data.content + '</td>';
 	html += '</tr>';
 	
 	$("#detailResult").append(html);

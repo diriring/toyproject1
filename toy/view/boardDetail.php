@@ -33,6 +33,8 @@ session_start();
     			</colgroup>
         		
         	</table>
+        	
+        	<div id="buttons"></div>
         
         	<div>
         		<div id="comment-count">댓글 <span id="count"></span></div>
