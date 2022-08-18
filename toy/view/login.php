@@ -16,7 +16,10 @@ require_once '../temp/bootstrap.php';
 	<?php require_once '../temp/header.php';?>
 
 	<div class="container">
-    	<h1>Login Page</h1>
+		<blockquote class="blockquote">
+          <h1 class="my-4">로그인</h1>
+          <footer class="blockquote-footer">로그인 후 이용해주세요.</footer>
+        </blockquote>
 		<form action="#" method="POST">
         	<div class="mb-3">
               <label for="id" class="form-label">ID</label>

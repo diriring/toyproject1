@@ -10,9 +10,6 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/view/boardList.php">자유게시판</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">추천게시판</a>
-            </li>
             <li class="nav-item dropdown">
               <?php 
                 if(isset($_SESSION['id'])) {
@@ -41,10 +38,6 @@
 
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
         </div>
       </div>
     </nav>

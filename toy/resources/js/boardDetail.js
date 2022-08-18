@@ -57,8 +57,10 @@ $("#buttons").on("click", "#delBtn", function () {
 	let bnum = urlParams.get('bnum');
 	
 	let src = new Array();
+	
 	$("#content img").each(function(index, item) {
-		let path = ".." + item.src.substring(15);
+		let split = item.src.split('/');
+		let path = "../" + split[3] + "/" + split[4] + "/" + split[5];
 		src[index] = path;
 	});
 	
@@ -87,7 +89,8 @@ $("#buttons").on("click", "#delBtn", function () {
 		error: function() {
 			alert("삭제 에러");
 		}
-	});	
+	});
+	
 	
 });
 

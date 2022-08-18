@@ -14,10 +14,13 @@ require_once '../temp/bootstrap.php';
 <body>
 
 	<?php require_once '../temp/header.php';?>
-
-	<h1>Join Page</h1>
 	
 	<div class="container">
+	
+		<blockquote class="blockquote">
+          <h1 class="my-4">회원가입</h1>
+          <footer class="blockquote-footer">보드게임을 좋아하는 모든 분을 환영합니다.</footer>
+        </blockquote>
 	
     	<div class="mb-3">
           <label for="id" class="form-label">ID</label>

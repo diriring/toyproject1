@@ -6,8 +6,8 @@ function summernoteInit(selector, code){
 
 	//summernote
 	$("#"+selector).summernote({
-		height:400,
-		width: 1210,
+		height: 600,
+		width: '100%',
 		
 		callbacks: {
 			onImageUpload: function(files) {

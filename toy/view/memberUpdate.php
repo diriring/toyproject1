@@ -23,7 +23,12 @@ require_once '../temp/bootstrap.php';
 
 	
 	<div class="container">
-	<h1>Member Update Page</h1>
+	
+		<blockquote class="blockquote">
+          <h1 class="my-4">회원 정보 수정</h1>
+          <footer class="blockquote-footer">회원 정보를 수정하실 수 있습니다.</footer>
+        </blockquote>
+        
 		<input type="hidden" id="sessionId" value="<?php echo $_SESSION['id'];?>">
         
         <div class="mb-3">

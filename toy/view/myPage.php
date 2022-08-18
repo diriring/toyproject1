@@ -18,7 +18,10 @@ session_start();
 	<?php require_once '../temp/header.php';?>
 
 	<div class="container">
-    	<h1>My Page</h1>
+		<blockquote class="blockquote">
+          <h1 class="my-4">마이페이지</h1>
+          <footer class="blockquote-footer">환영합니다, <?php echo $_SESSION['id'];?>님.</footer>
+        </blockquote>
     	
     	<input type="hidden" id="sessionId" value="<?php echo $_SESSION['id'];?>">
     	

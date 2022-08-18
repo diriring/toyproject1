@@ -26,11 +26,7 @@ session_start();
 	<div class="container">
     	
     	<div class="row">
-			<div class="alert alert-primary" role="alert">
-			 	<h4 style="text-transform: capitalize;">게시판 글 수정</h4>
-			</div>
-			
-			
+				
 			<div id="ajaxResult">
     			<div class="row">
         			<div class="input-group mb-3">
@@ -49,7 +45,6 @@ session_start();
         		</div>
 	    		<div class="row">
         			<div class="input-group">
-        			  <span class="input-group-text">글 내용</span>
         			  <textarea name="content" class="form-control" aria-label="With textarea" id="content"></textarea>
         			</div>
         		</div>

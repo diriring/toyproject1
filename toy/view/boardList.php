@@ -16,7 +16,11 @@ session_start();
 	<?php require_once '../temp/header.php';?>
 
 	<div class="container">
-    	<h1>Board List Page</h1>
+		
+		<blockquote class="blockquote">
+          <h1 class="my-4">자유 게시판</h1>
+          <footer class="blockquote-footer">보드게임에 관해 자유롭게 의견을 나눠주세요.</footer>
+        </blockquote>
     	
     	<div class="col-2 d-inline-block">
 			<select class="form-select" id="kind" aria-label="Default select example">

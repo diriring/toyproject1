@@ -23,12 +23,9 @@ session_start();
 	<div class="container">
     	
     	<div class="row">
-			<div class="alert alert-primary" role="alert">
-			 	<h4 style="text-transform: capitalize;">게시판 글쓰기</h4>
-			</div>
-			
+
     		<form action="./boardInsert.php" method="POST">
-    			<div class="row">
+    			<div class="row mt-5">
         			<div class="input-group mb-3">
         			  <span class="input-group-text" id="basic-addon1">글 제목</span>
         			  <input type="text" name="title" id="title" class="form-control" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
@@ -45,7 +42,6 @@ session_start();
         		</div>
         		<div class="row">
         			<div class="input-group">
-        			  <span class="input-group-text">글 내용</span>
         			  <textarea name="content" class="form-control" aria-label="With textarea" id="content"></textarea>
         			</div>
         		</div>

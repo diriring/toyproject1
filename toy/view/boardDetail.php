@@ -19,7 +19,6 @@ session_start();
 	<?php require_once '../temp/header.php';?>
 
 	<div class="container">
-    	<h1>Board Detail Page</h1>
     	
     	<div class="container mt-5">
         	<input type="hidden" id="sessionId" value="<?php echo $_SESSION['id'];?>">
