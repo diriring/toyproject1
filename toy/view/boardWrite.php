@@ -34,6 +34,13 @@ session_start();
         			  <input type="text" name="title" id="title" class="form-control" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
         			  <span class="input-group-text" id="basic-addon1">작성자</span>
         			  <input type="text" name="id" id="id" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value="<?php echo $_SESSION['id'];?>" readonly="readonly">
+        			  <span class="input-group-text" id="basic-addon1">말머리</span>
+        			  <select class="form-select" id="cnum">
+        			  	<option value="1">자유토크</option>
+        			  	<option value="2">보드게임 파티 모집</option>
+        			  	<option value="3">보드게임 소개</option>
+        			  	<option value="4">보드게임 카페 추천</option>
+        			  </select>
         			</div>
         		</div>
         		<div class="row">

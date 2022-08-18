@@ -12,6 +12,8 @@ $( document ).ready(function() {
 
 $("#addBtn").on("click", function() {
 	//console.log("클릭");
+	console.log($("#cnum").val());
+	
 	$.ajax({
 		type: "POST",
 		url: "/board/BoardMapper.php",
@@ -19,6 +21,7 @@ $("#addBtn").on("click", function() {
 			id: $("#id").val(),
 			title: $("#title").val(),
 			content: $("#content").val(),
+			cnum: $("#cnum").val(),
 			call_name: "setAdd"
 		},
 		success: function(result) {
@@ -36,4 +39,5 @@ $("#addBtn").on("click", function() {
 			alert("에러");
 		}
 	});
+
 });

@@ -26,10 +26,11 @@ session_start();
         	
         	<table class="table" id="detailResult">
         		<colgroup>
+        			<col width="15%"/>
     				<col width="55%"/>
-    				<col width="15%"/>
-    				<col width="15%"/>
-    				<col width="15%"/>
+    				<col width="10%"/>
+    				<col width="10%"/>
+    				<col width="10%"/>
     			</colgroup>
         		
         	</table>

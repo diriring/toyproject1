@@ -109,6 +109,7 @@ function detailHtml(data) {
 
 	let html = '<thead>';
 	html += '<tr>';
+	html += '<td>말머리</td>';
 	html += '<td>제목</td>';
 	html += '<td>작성자</td>';
 	html += '<td>작성날짜</td>';
@@ -117,6 +118,7 @@ function detailHtml(data) {
 	html += '</thead>';
 	
 	html += '<tr>';
+	html += '<td>' + data.name + '</td>';
 	html += '<td>' + data.title + '</td>';
 	html += '<td>' + data.id + '</td>';
 	html += '<td>' + data.regDate + '</td>';

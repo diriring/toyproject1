@@ -42,7 +42,7 @@ session_start();
 			</colgroup>
 			<thead>
 				<tr>
-					<th>글 번호</th>
+					<th>말머리</th>
 					<th>글 제목</th>
 					<th>작성자</th>
 					<th>작성날짜</th>

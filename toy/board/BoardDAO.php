@@ -15,14 +15,18 @@ class BoardDAO {
     public function getList($startRow, $perPage) {
 
         $sql = 'SELECT 
-                    bnum, 
-                    id, 
-                    title, 
-                    content, 
-                    regDate, 
-                    hit 
+                    bd.bnum, 
+                    bd.id, 
+                    bd.title, 
+                    bd.content, 
+                    bd.regDate, 
+                    bd.hit,
+                    ct.name 
                 FROM 
-                    BOARD 
+                    BOARD bd
+                INNER JOIN
+                    CATEGORY ct
+                    ON (bd.cnum = ct.cnum)
                 WHERE 
                     bnum > 0
                 ORDER BY 
@@ -61,10 +65,25 @@ class BoardDAO {
     }
     
     public function getDetail($bnum) {
-        $sql = 'SELECT * FROM BOARD WHERE bnum = ?';
+        $sql = 'SELECT
+                    bd.bnum,
+                    bd.id,
+                    bd.title,
+                    bd.content,
+                    bd.regDate,
+                    bd.hit,
+                    ct.cnum,
+                    ct.name
+                FROM
+                    BOARD bd
+                INNER JOIN
+                    CATEGORY ct
+                    ON (bd.cnum = ct.cnum)
+                WHERE 
+                    bnum = :bnum';
         $stmt = $this->pdo->prepare($sql);
-
-        $result = $stmt->execute(array($bnum));    
+        $stmt->bindValue(':bnum', $bnum, PDO::PARAM_INT);
+        $result = $stmt->execute();    
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         
         return $result;
@@ -72,13 +91,14 @@ class BoardDAO {
     
     public function setAdd($array) {
         $sql = '
-                INSERT INTO BOARD (id, title, content, regDate)
-                VALUES (:id, :title, :content, NOW())
+                INSERT INTO BOARD (id, title, content, cnum, regDate)
+                VALUES (:id, :title, :content, :cnum, NOW())
                 ';
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':id', $array['id'], PDO::PARAM_STR);
         $stmt->bindValue(':title', $array['title'], PDO::PARAM_STR);
         $stmt->bindValue(':content', $array['content'], PDO::PARAM_STR);
+        $stmt->bindValue(':cnum', $array['cnum'], PDO::PARAM_INT);
         $stmt->execute();
         
         $count = $stmt->rowCount();
@@ -89,12 +109,13 @@ class BoardDAO {
     public function setUpdate($array) {
         $sql = '
                 UPDATE BOARD SET
-                title = :title, content = :content, editDate = NOW()
+                title = :title, content = :content, cnum = :cnum, editDate = NOW()
                 WHERE bnum = :bnum
                 ';
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':title', $array['title'], PDO::PARAM_STR);
         $stmt->bindValue(':content', $array['content'], PDO::PARAM_STR);
+        $stmt->bindValue(':cnum', $array['cnum'], PDO::PARAM_INT);
         $stmt->bindValue(':bnum', $array['bnum'], PDO::PARAM_INT);
         $stmt->execute();
         
@@ -130,14 +151,18 @@ class BoardDAO {
             
             case 'title':
                 $sql = 'SELECT
-                            bnum,
-                            id,
-                            title,
-                            content,
-                            regDate,
-                            hit
+                            bd.bnum,
+                            bd.id,
+                            bd.title,
+                            bd.content,
+                            bd.regDate,
+                            bd.hit,
+                            ct.name
                         FROM
-                            BOARD
+                            BOARD bd
+                        INNER JOIN
+                            CATEGORY ct
+                            ON (bd.cnum = ct.cnum)
                         WHERE
                             title LIKE CONCAT("%", :search, "%")
                             
@@ -149,14 +174,18 @@ class BoardDAO {
                 
             case 'content':
                 $sql = 'SELECT
-                            bnum,
-                            id,
-                            title,
-                            content,
-                            regDate,
-                            hit
+                            bd.bnum,
+                            bd.id,
+                            bd.title,
+                            bd.content,
+                            bd.regDate,
+                            bd.hit,
+                            ct.name
                         FROM
-                            BOARD
+                            BOARD bd
+                        INNER JOIN
+                            CATEGORY ct
+                            ON (bd.cnum = ct.cnum)
                         WHERE
                             content LIKE CONCAT("%", :search, "%")
                     
@@ -168,14 +197,18 @@ class BoardDAO {
                 
             case 'id':
                 $sql = 'SELECT
-                            bnum,
-                            id,
-                            title,
-                            content,
-                            regDate,
-                            hit
+                            bd.bnum,
+                            bd.id,
+                            bd.title,
+                            bd.content,
+                            bd.regDate,
+                            bd.hit,
+                            ct.name
                         FROM
-                            BOARD
+                            BOARD bd
+                        INNER JOIN
+                            CATEGORY ct
+                            ON (bd.cnum = ct.cnum)
                         WHERE
                             id LIKE CONCAT("%", :search, "%")
                     

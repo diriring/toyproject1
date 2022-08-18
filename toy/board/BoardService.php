@@ -66,18 +66,18 @@ class BoardService {
     }
     
     //게시글 등록
-    public function setAdd($id, $title, $content) {
+    public function setAdd($id, $title, $content, $cnum) {
         
-        $board = array('id'=>$id, 'title'=>$title, 'content'=>$content);
+        $board = array('id'=>$id, 'title'=>$title, 'content'=>$content, 'cnum'=>$cnum);
         $result = $this->dao->setAdd($board);
         
         return $result;
     }
     
     //게시글 수정
-    public function setUpdate($bnum, $title, $content) {
+    public function setUpdate($bnum, $title, $content, $cnum) {
         
-        $board = array('bnum'=>$bnum, 'title'=>$title, 'content'=>$content);
+        $board = array('bnum'=>$bnum, 'title'=>$title, 'content'=>$content, 'cnum'=>$cnum);
         $result = $this->dao->setUpdate($board);
         
         return $result;

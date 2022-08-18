@@ -29,7 +29,7 @@
 				name: $("#name").val()
 			},
 			success: function(result) {
-					console.log(result);
+					console.log(JSON.parse(result));
 					
 			},
 			error: function() {

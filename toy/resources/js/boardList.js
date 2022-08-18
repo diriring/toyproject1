@@ -69,7 +69,7 @@ function getList(kindInput, searchInput, pnInput, searchCheck) {
 		success: function(result) {
  			//console.log(result);
 			let data = JSON.parse(result);
-			//console.log(data);
+			console.log(data);
 			
 			boardHtml(data, kind, search);
 
@@ -113,7 +113,7 @@ function boardHtml(data){
 	let html = "";
 	$.each(data, function(key, value){
     	html += "<tr>";
-		html += "<td>" + value.bnum + "</td>";
+		html += "<td>" + value.name + "</td>";
 		html += "<td>" + "<a href=\"./boardDetail.php?bnum=" + value.bnum + "\">" + value.title + "</a>" + "</td>";
 		html += "<td>" + value.id + "</td>";
 		html += "<td>" + value.regDate + "</td>";
@@ -180,7 +180,7 @@ function pageSearchHtml(data, kind, search) {
 		html += '<p role="button" class="page-link pager" data-pn="1" data-kind="' + kind + '" data-search="' + search + '" aria-label="Previous">';
 	}
 
-	html += '<span aria-hidden="true">&laquo;</span>';
+	html += '&laquo;';
 	html += '</p>';
 	html += '<li>';
     		
@@ -196,7 +196,7 @@ function pageSearchHtml(data, kind, search) {
 		html += '<p role="button" class="page-link pager" data-pn="' + data.lastNum + '" data-kind="' + kind + '" data-search="' + search + '" aria-label="Next">';
 	}
 
-	html += '<span aria-hidden="true">&raquo;</span>';
+	html += '&raquo;';
 		
 	html += '</p>';
 	html += '</li>';

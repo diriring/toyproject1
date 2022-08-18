@@ -22,6 +22,7 @@ function getDetail() {
 
 			$("#title").val(data.title);
 			$("#id").val(data.id);
+			$("#cnum").val(data.cnum);
 			summernoteInit("content", data.content);
 
 		},
@@ -49,6 +50,7 @@ $("#updateBtn").on("click", function() {
 			title: $("#title").val(),
 			content: $("#content").val(),
 			bnum: bnum,
+			cnum: $("#cnum").val(),
 			call_name: "setUpdate"
 		},
 		success: function(result) {

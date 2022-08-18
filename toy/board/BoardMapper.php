@@ -40,14 +40,14 @@ class BoardMapper {
         return $json;
     }
     
-    public function setAdd($id, $title, $content) {
+    public function setAdd($id, $title, $content, $cnum) {
         
-        $result = $this->service->setAdd($id, $title, $content);
+        $result = $this->service->setAdd($id, $title, $content, $cnum);
         return $result;        
     }
     
-    public function setUpdate($bnum, $title, $content) {
-        $result = $this->service->setUpdate($bnum, $title, $content);
+    public function setUpdate($bnum, $title, $content, $cnum) {
+        $result = $this->service->setUpdate($bnum, $title, $content, $cnum);
         return $result;   
     }
     
@@ -100,11 +100,11 @@ if (isset($_POST['call_name'])) {
             break;
             
         case 'setAdd':
-            echo $mapper->setAdd($_POST['id'], $_POST['title'], $_POST['content']);
+            echo $mapper->setAdd($_POST['id'], $_POST['title'], $_POST['content'], $_POST['cnum']);
             break;
             
         case 'setUpdate':
-            echo $mapper->setUpdate($_POST['bnum'], $_POST['title'], $_POST['content']);
+            echo $mapper->setUpdate($_POST['bnum'], $_POST['title'], $_POST['content'], $_POST['cnum']);
             break;
             
         case 'setDelete':
