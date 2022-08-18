@@ -126,7 +126,7 @@ function detailHtml(data) {
 	html += '</tr>';
 	
 	html += '<tr>';
-	html += '<td colspan="4" id="content">' + data.content + '</td>';
+	html += '<td colspan="5" id="content">' + data.content + '</td>';
 	html += '</tr>';
 	
 	$("#detailResult").append(html);

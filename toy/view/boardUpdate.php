@@ -64,9 +64,7 @@ session_start();
     
 <script src="../resources/js/summernote.js"></script>
 <script src="../resources/js/boardUpdate.js"></script>
-<script type="text/javascript">
-	getDetail();	
-</script>
+
 
 </body>
 </html>

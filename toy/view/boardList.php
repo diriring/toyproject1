@@ -32,13 +32,13 @@ session_start();
 			</div>
 		</div>
     	
-    	<table class="table table-striped table-hover">
+    	<table class="table table-striped table-hover table-bordered text-center">
 			<colgroup>
-				<col width="12%"/>
-				<col width="52%"/>
-				<col width="12%"/>
-				<col width="12%"/>
-				<col width="12%"/>
+				<col width="20%"/>
+				<col width="50%"/>
+				<col width="10%"/>
+				<col width="10%"/>
+				<col width="10%"/>
 			</colgroup>
 			<thead>
 				<tr>
@@ -56,17 +56,20 @@ session_start();
 		</table>
     	
     	<input type="hidden" id="pn" value="">
-    	<div class="row justify-content-between" id="pageResult">
 
-		</div>
-    	<a class="btn btn-outline-primary" href="./boardWrite.php">글 쓰기</a>
+    	<div class="row">
+        	<div class="col-11" id="pageResult">
+    
+    		</div>
+    		<div class="col-1">
+        		<a class="btn btn-outline-primary d-block text-right" href="./boardWrite.php">글 쓰기</a>
+    		</div>
+    	</div>
     	
 	</div>
 
 <script src = "../resources/js/boardList.js"></script>
-<script>
-	getList('title', '', 1, false);
-</script>
+
 </body>
 
 </html>

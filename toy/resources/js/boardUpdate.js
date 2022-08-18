@@ -1,3 +1,7 @@
+$( document ).ready(function() {
+	getDetail();
+});
+
 //수정하려는 글 상세 정보 조회
 function getDetail() {
 

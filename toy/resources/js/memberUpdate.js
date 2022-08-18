@@ -1,3 +1,7 @@
+$( document ).ready(function() {
+	getMyInfo();
+});
+
 //회원 정보 조회
 function getMyInfo() {
 	

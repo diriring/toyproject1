@@ -1,3 +1,7 @@
+$( document ).ready(function() {
+	getList('title', '', 1, false);
+});
+
 $("#searchBtn").on("click", function() {
 	
 	//url에서 파라미터 제거

@@ -48,11 +48,6 @@ require_once '../temp/bootstrap.php';
 	</div>
 	
 <script src="../resources/js/memberUpdate.js"></script>
-<script>
-	
-	getMyInfo();
-
-</script>
 
 </body>
 
