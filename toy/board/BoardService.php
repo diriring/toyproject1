@@ -99,24 +99,29 @@ class BoardService {
         
         $boardList = array();
         
-        foreach ($result as $row) {
+        foreach ($result['result'] as $row) {
             $boardList[] = $row;
         }
         
-        return $boardList;
+        $result['result'] =$boardList;
+        
+        return $result;
     }
     
     public function getSearchPage($pn, $kind, $search) {
         
         $pager = new Pager(5, $pn);
         
-        $totalCount = $this->dao->getTotalSearch($kind, $search);
+        $result = $this->dao->getTotalSearch($kind, $search);
         
-        $pager->makeNum($totalCount);
+        $pager->makeNum($result['result']);
         
         $array = array('startNum'=>$pager->getStartNum(), 'lastNum'=>$pager->getLastNum(),
-                        'pre'=>$pager->getPre(), 'next'=>$pager->getNext(), 'totalCount'=>$totalCount);
-        return $array;
+                        'pre'=>$pager->getPre(), 'next'=>$pager->getNext(), 'totalCount'=>$result['result']);
+        
+        $result['result'] = $array;
+        
+        return $result;
     }
     
     public function getTotalSearch($kind, $search) {

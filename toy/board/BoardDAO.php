@@ -36,12 +36,13 @@ class BoardDAO {
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':startRow', $startRow, PDO::PARAM_INT);
         $stmt->bindValue(':perPage', $perPage, PDO::PARAM_INT);
-        $stmt->execute();
         
+        $check = $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
+        $resultData = array('status'=>$check, 'result'=>$result);
         
-        return $result;
+        return $resultData;
         
     }
     
@@ -224,13 +225,12 @@ class BoardDAO {
         $stmt->bindValue(':startRow', $startRow, PDO::PARAM_INT);
         $stmt->bindValue(':perPage', $perPage, PDO::PARAM_INT);
         $stmt->bindValue(':search', $search, PDO::PARAM_STR);
-        $stmt->execute();
-        
+        $check = $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-           
-//         $result = array('startRow'=>$startRow, 'perPage'=>$perPage, 'kind'=>$kind, 'search'=>$search);
         
-        return $result;
+        $resultData = array('status'=>$check, 'result'=>$result);
+        
+        return $resultData;
     }
     
     public function getTotalSearch($kind, $search) {
@@ -268,12 +268,15 @@ class BoardDAO {
         
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':search', $search, PDO::PARAM_STR);
-        $stmt->execute();
+        
+        $check = $stmt->execute();
         
         //행의 첫번째 컬럼을 리턴
         $result = $stmt->fetchColumn();
         
-        return $result;
+        $resultData = array('status'=>$check, 'result'=>$result);
+        
+        return $resultData;
         
     }
     

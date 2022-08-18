@@ -75,7 +75,12 @@ function getList(kindInput, searchInput, pnInput, searchCheck) {
 			let data = JSON.parse(result);
 			console.log(data);
 			
-			boardHtml(data, kind, search);
+			if(!data.status) {
+				alert("DB 조회 오류");
+				return false;
+			}
+			
+			boardHtml(data.result, kind, search);
 
 		},
 		error: function() {
@@ -97,10 +102,15 @@ function getList(kindInput, searchInput, pnInput, searchCheck) {
 			let data = JSON.parse(result);
 			console.log(data);
 			
+			if(!data.status) {
+				alert("페이지 DB 오류");
+				return false;
+			}
+			
 			if(searchCheck) {
-				pageSearchHtml(data, kind, search);
+				pageSearchHtml(data.result, kind, search);
 			} else {
-				pageHtml(data);
+				pageHtml(data.result);
 			} 
 			
 
