@@ -11,7 +11,11 @@ class MemberService {
         $this->dao = new MemberDAO();
     }
     
-    //로그인
+    /**
+     * 로그인
+     * @param string $id
+     * @param string $pw
+     */
     public function getLogin($id, $password) {
             //DB조회
             $result = $this->dao->getLogin($id, $password);
@@ -29,13 +33,18 @@ class MemberService {
             return $res;
     }
     
-    //로그아웃
+    /**
+     * 로그아웃
+     */
     public function getLogout() {
         session_start();
         session_destroy();
     }
     
-    //회원 정보 조회
+    /**
+     * 마이페이지 정보 조회
+     * @param string $id
+     */
     public function getMyInfo($id) {
         
         $result = $this->dao->getMyInfo($id);
@@ -43,35 +52,58 @@ class MemberService {
         return $result;
     }
     
-    //아이디 중복 체크
+    /**
+     * 아이디 중복 조회
+     * @param string $id
+     */
     public function getIdCheck($id) {
         $result = $this->dao->getIdCheck($id);
         
         return $result;
     }
     
-    //이메일 중복 체크
+    /**
+     * 이메일 중복 조회
+     * @param string $email
+     */
     public function getEmailCheck($email) {
         $result = $this->dao->getEmailCheck($email);
 
         return $result;
     }
     
-    //회원가입
+    /**
+     * 회원가입 인서트
+     * @param string $id
+     * @param string $password
+     * @param string $name
+     * @param string $email
+     * @param string $phone
+     */
     public function setAdd($id, $password, $name, $email, $phone) {
         $result = $this->dao->setAdd($id, $password, $name, $email, $phone);
         return $result;
            
     }
     
-    //회원 정보 수정
+    /**
+     * 회원 정보 업데이트
+     * @param string $id
+     * @param string $name
+     * @param string $email
+     * @param string $phone
+     */
     public function setUpdate($id, $name, $email, $phone) {
         $result = $this->dao->setUpdate($id, $name, $email, $phone);
         
         return $result;
     }
     
-    //회원 탈퇴 처리
+    /**
+     * 회원 탈퇴
+     * @param string $id
+     * @param string $password
+     */
     public function setMemberDelete($id, $password) {
         $return = $this->dao->getPW($id);
         $pw = $return['password'];

@@ -32,7 +32,10 @@ class BoardMapper {
             return $json;
     }
     
-    //게시글 상세 조회
+    /**
+     * 게시판 정보 조회
+     * @param int $bnum
+     */
     public function getDetail($bnum) {
         $board = $this->service->getDetail($bnum);
         $json = json_encode($board);
@@ -40,25 +43,48 @@ class BoardMapper {
         return $json;
     }
     
+    /**
+     * 게시판 글 등록
+     * @param string $id
+     * @param string $title
+     * @param string $content
+     * @param int $cnum
+     */
     public function setAdd($id, $title, $content, $cnum) {
         
         $result = $this->service->setAdd($id, $title, $content, $cnum);
         return $result;        
     }
     
+    /**
+     * 게시판 글 수정
+     * @param string $id
+     * @param string $title
+     * @param string $content
+     * @param int $cnum
+     */
     public function setUpdate($bnum, $title, $content, $cnum) {
         $result = $this->service->setUpdate($bnum, $title, $content, $cnum);
         return $result;   
     }
     
     
-    //게시글 삭제
+    /**
+     * 게시판 글 삭제
+     * @param int $bnum
+     */
     public function setDelete($bnum) {
         $result = $this->service->setDelete($bnum);
         
         return $result;
     }
     
+    /**
+     * 게시판 글 목록 조회
+     * @param int $pn
+     * @param string $kind
+     * @param string $search
+     */
     public function getSearch($pn, $kind, $search) {
         $list = $this->service->getSearch($pn, $kind, $search);
         
@@ -68,6 +94,12 @@ class BoardMapper {
         return $json;
     }
     
+    /**
+     * 게시판 글 페이지 생성
+     * @param int $pn
+     * @param string $kind
+     * @param string $search
+     */
     public function getSearchPage($pn, $kind, $search) {
         $array = $this->service->getSearchPage($pn, $kind, $search);
         
@@ -76,6 +108,11 @@ class BoardMapper {
         return $json;
     }
     
+    /**
+     * 글 개수 조회
+     * @param string $kind
+     * @param string $search
+     */
     public function getTotalSearch($kind, $search) {
         return $this->service->getTotalSearch($kind, $search);
     }

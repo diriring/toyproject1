@@ -9,11 +9,12 @@ class MemberMapper {
     public function __construct() {
         $this->service = new MemberService();
     }
+
     
-    public function test($id) {
-        return $id;
-    }
-    
+    /**
+     * 마이페이지 정보 조회
+     * @param string $id
+     */
     public function getMyInfo($id) {
         $member = $this->service->getMyInfo($id);
         $array = array('id'=>$member->getId(), 'name'=>$member->getName(), 'email'=>$member->getEmail(), 'phone'=>$member->getPhone());
@@ -21,30 +22,66 @@ class MemberMapper {
         return $json;
     }
     
+    /**
+     * 로그인
+     * @param string $id
+     * @param string $pw
+     */
     public function getLogin($id, $password) {
         return $this->service->getLogin($id, $password);
     }
     
+    /**
+     * 로그아웃
+     */
     public function getLogout() {
         return $this->service->getLogout();
     }
     
+    /**
+     * 아이디 중복 조회
+     * @param string $id
+     */
     public function getIdCheck($id) {
         return $this->service->getIdCheck($id);
     }
     
+    /**
+     * 이메일 중복 조회
+     * @param string $email
+     */
     public function getEmailCheck($email) {
         return $this->service->getEmailCheck($email);
     }
     
+    /**
+     * 회원가입 인서트
+     * @param string $id
+     * @param string $password
+     * @param string $name
+     * @param string $email
+     * @param string $phone
+     */
     public function setAdd($id, $password, $name, $email, $phone) {
         return $this->service->setAdd($id, $password, $name, $email, $phone);
     }
     
+    /**
+     * 회원 정보 업데이트
+     * @param string $id
+     * @param string $name
+     * @param string $email
+     * @param string $phone
+     */
     public function setUpdate($id, $name, $email, $phone) {
         return $this->service->setUpdate($id, $name, $email, $phone);
     }
     
+    /**
+     * 회원 탈퇴
+     * @param string $id
+     * @param string $password
+     */
     public function setMemberDelete($id, $password) {
         return $this->service->setMemberDelete($id, $password);
     }
@@ -54,10 +91,6 @@ class MemberMapper {
 $mapper = new MemberMapper();
 if (isset($_POST['call_name'])) {
     switch ($_POST['call_name']) {
-        
-        case 'test':
-            echo $mapper->test($_POST['id']);
-            break;
         
         case 'getMyInfo':
             echo $mapper->getMyInfo($_POST['id']);

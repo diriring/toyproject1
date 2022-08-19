@@ -12,7 +12,11 @@ class MemberDAO {
         $this->pdo = $conn->getPdo();
     }
     
-    // 로그인
+    /**
+     * 로그인
+     * @param string $id
+     * @param string $pw
+     */
     public function getLogin($id, $pw) {
         $sql = 'SELECT 
                     id 
@@ -34,7 +38,10 @@ class MemberDAO {
         
     }
     
-    // 마이페이지 정보 조회
+    /**
+     * 마이페이지 정보 조회
+     * @param string $id
+     */
     public function getMyInfo($id) {
         $sql = 'SELECT 
                     id, 
@@ -61,7 +68,10 @@ class MemberDAO {
         return $member;
     }
     
-    // 회원 비밀번호 조회
+    /**
+     * 회원 비밀번호 조회
+     * @param string $id
+     */
     public function getPW($id) {
         $sql = 'SELECT
                     password 
@@ -81,7 +91,10 @@ class MemberDAO {
         return $result;
     }
     
-    // 아이디 중복 조회
+    /**
+     * 아이디 중복 조회
+     * @param string $input
+     */
     public function getIdCheck($input) {
         $sql = 'SELECT 
                     COUNT(id) 
@@ -98,7 +111,10 @@ class MemberDAO {
         return $count;
     }
     
-    // 이메일 중복 조회
+    /**
+     * 이메일 중복 조회
+     * @param string $input
+     */
     public function getEmailCheck($input) {
         $sql = 'SELECT 
                     COUNT(id) 
@@ -115,7 +131,14 @@ class MemberDAO {
         return $count;
     }
     
-    // 회원가입 정보 INSERT
+    /**
+     * 회원가입 인서트
+     * @param string $id
+     * @param string $password
+     * @param string $name
+     * @param string $email
+     * @param string $phone
+     */
     public function setAdd($id, $password, $name, $email, $phone) {
         $sql = 'INSERT INTO 
                     MEMBER 
@@ -138,7 +161,13 @@ class MemberDAO {
         return $count;
     }
     
-    // 회원 정보 UPDATE
+    /**
+     * 회원 정보 업데이트
+     * @param string $id
+     * @param string $name
+     * @param string $email
+     * @param string $phone
+     */
     public function setUpdate($id, $name, $email, $phone) {
         $sql = 'UPDATE
                     MEMBER 
@@ -163,7 +192,10 @@ class MemberDAO {
         return $count;
     }
     
-    // 회원 탈퇴 처리
+    /**
+     * 회원 탈퇴
+     * @param string $id
+     */
     public function setMemberDelete($id) {
         $sql = 'UPDATE 
                     MEMBER 

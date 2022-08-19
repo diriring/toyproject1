@@ -65,6 +65,10 @@ class BoardDAO {
         
     }
     
+    /**
+     * 게시판 정보 조회
+     * @param int $bnum
+     */
     public function getDetail($bnum) {
         $sql = 'SELECT
                     bd.bnum,
@@ -90,6 +94,10 @@ class BoardDAO {
         return $result;
     }
     
+    /**
+     * 게시판 글 등록
+     * @param array $array
+     */
     public function setAdd($array) {
         $sql = '
                 INSERT INTO BOARD (id, title, content, cnum, regDate)
@@ -107,6 +115,10 @@ class BoardDAO {
         return $count;
     }
     
+    /**
+     * 게시판 글 업데이트
+     * @param array $array
+     */
     public function setUpdate($array) {
         $sql = '
                 UPDATE BOARD SET
@@ -125,6 +137,10 @@ class BoardDAO {
         return $count;
     }
     
+    /**
+     * 게시판 글 삭제
+     * @param int $bnum
+     */
     public function setDelete($bnum) {
         $sql = 'DELETE FROM BOARD WHERE bnum = :bnum';
         $stmt = $this->pdo->prepare($sql);
@@ -136,6 +152,10 @@ class BoardDAO {
         return $count;
     }
     
+    /**
+     * 조회수
+     * @param int $bnum
+     */
     public function setCountHit($bnum) {
         $sql = 'UPDATE BOARD SET hit = hit+1 WHERE bnum = ?';
         $stmt = $this->pdo->prepare($sql);
@@ -145,7 +165,14 @@ class BoardDAO {
         
         return $count;
     }
-    
+
+    /**
+     * 게시판 글 목록 조회
+     * @param int $startRow
+     * @param int $perPage
+     * @param string $kind
+     * @param string $search
+     */
     public function getSearch($startRow, $perPage, $kind, $search) {
         $sql = '';
         switch($kind) {
@@ -233,6 +260,11 @@ class BoardDAO {
         return $resultData;
     }
     
+    /**
+     * 글 개수 조회
+     * @param string $kind
+     * @param string $search
+     */
     public function getTotalSearch($kind, $search) {
         $sql = '';
         switch($kind) {

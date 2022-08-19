@@ -56,7 +56,10 @@ class BoardService {
         return $result;
     }
     
-    //게시글 정보 조회
+    /**
+     * 게시판 정보 조회
+     * @param int $bnum
+     */
     public function getDetail($bnum) {
         
         $this->dao->setCountHit($bnum);
@@ -65,7 +68,13 @@ class BoardService {
         return $result;
     }
     
-    //게시글 등록
+    /**
+     * 게시판 글 등록
+     * @param string $id
+     * @param string $title
+     * @param string $content
+     * @param int $cnum
+     */
     public function setAdd($id, $title, $content, $cnum) {
         
         $board = array('id'=>$id, 'title'=>$title, 'content'=>$content, 'cnum'=>$cnum);
@@ -74,7 +83,13 @@ class BoardService {
         return $result;
     }
     
-    //게시글 수정
+    /**
+     * 게시판 글 수정
+     * @param string $id
+     * @param string $title
+     * @param string $content
+     * @param int $cnum
+     */
     public function setUpdate($bnum, $title, $content, $cnum) {
         
         $board = array('bnum'=>$bnum, 'title'=>$title, 'content'=>$content, 'cnum'=>$cnum);
@@ -83,7 +98,10 @@ class BoardService {
         return $result;
     }
     
-    //게시글 삭제
+    /**
+     * 게시판 글 삭제
+     * @param int $bnum
+     */
     public function setDelete($bnum) {
 
         $result = $this->dao->setDelete($bnum);
@@ -92,6 +110,12 @@ class BoardService {
         
     }
     
+    /**
+     * 게시판 글 목록 조회
+     * @param int $pn
+     * @param string $kind
+     * @param string $search
+     */
     public function getSearch($pn, $kind, $search) {
         $pager = new Pager(5, $pn);
         $pager->makeRow();
@@ -108,6 +132,12 @@ class BoardService {
         return $result;
     }
     
+    /**
+     * 게시판 글 페이지 생성
+     * @param int $pn
+     * @param string $kind
+     * @param string $search
+     */
     public function getSearchPage($pn, $kind, $search) {
         
         $pager = new Pager(5, $pn);
@@ -124,6 +154,11 @@ class BoardService {
         return $result;
     }
     
+    /**
+     * 글 개수 조회
+     * @param string $kind
+     * @param string $search
+     */
     public function getTotalSearch($kind, $search) {
         return $this->dao->getTotalSearch($kind, $search);
     }
